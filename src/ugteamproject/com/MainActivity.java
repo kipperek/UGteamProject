@@ -3,21 +3,21 @@ package ugteamproject.com;
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
-import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.andengine.engine.options.resolutionpolicy.FillResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 public class MainActivity extends SimpleBaseGameActivity {
 	 
-    static final int CAMERA_WIDTH = 1280;
-    static final int CAMERA_HEIGHT = 768;
+    static final int CAMERA_WIDTH = 800;
+    static final int CAMERA_HEIGHT = 600;
  
     @Override
     public EngineOptions onCreateEngineOptions() {
         Camera mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
-        return new EngineOptions(true, ScreenOrientation.LANDSCAPE_SENSOR,
-            new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
+        return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED,
+        		new	FillResolutionPolicy(), mCamera);
     }
  
     @Override
