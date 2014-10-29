@@ -1,4 +1,4 @@
-package com.ugteamproject;
+package com.UGTeamProject.game;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
@@ -19,7 +19,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Game extends ApplicationAdapter {
+public class GameManager extends ApplicationAdapter {
 
     OrthographicCamera camera;
     int width, height;
