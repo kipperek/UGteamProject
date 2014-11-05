@@ -6,6 +6,7 @@ import box2dLight.RayHandler;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,7 +23,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class GameManager extends ApplicationAdapter {
 
-	final static int ZOOM = 5;
+	final static int ZOOM = 1;
 	final static float PIXELS_TO_METERS = 100f;
 	
     int width, height;
@@ -37,10 +38,12 @@ public class GameManager extends ApplicationAdapter {
     
     RayHandler raysHandler;
     
+    FPSLogger fpsLogger;
+    
 	@Override
 	public void create () {
-	    width = 1280 / ZOOM;
-	    height = 1000 / ZOOM;
+	    width =  1280 / ZOOM;
+	    height = 768 / ZOOM;
 	    
 	    batch = new SpriteBatch();
 	    
@@ -50,6 +53,8 @@ public class GameManager extends ApplicationAdapter {
 	    
 	    physicsDebuger = new Box2DDebugRenderer();
 	    
+	    fpsLogger = new FPSLogger();
+	    
 	    BodyDef circleDef = new BodyDef();
 	    circleDef.type = BodyType.DynamicBody;
 	    circleDef.position.set(new Vector2(0, height/2 / PIXELS_TO_METERS));
@@ -57,7 +62,7 @@ public class GameManager extends ApplicationAdapter {
 	    Body circle = physics.createBody(circleDef);
 	    
 	    CircleShape circleShape = new CircleShape();
-	    circleShape.setRadius(10f / PIXELS_TO_METERS);
+	    circleShape.setRadius(1f );
 	    
 	    FixtureDef circleFixture = new FixtureDef();
 	    circleFixture.shape = circleShape;
@@ -78,7 +83,7 @@ public class GameManager extends ApplicationAdapter {
 	    
 	    raysHandler = new RayHandler(physics);
 	    
-	    new PointLight(raysHandler, 3600, Color.WHITE, 200 / PIXELS_TO_METERS, 0, 0).setSoft(false);
+	    new PointLight(raysHandler, 3600, Color.WHITE, 7.68f, 0, 0).setSoft(false);
 	}
 	
 	@Override
@@ -96,6 +101,8 @@ public class GameManager extends ApplicationAdapter {
 		batch.begin();
 		
 		batch.end();
+				
+		//fpsLogger.log();
 		
         debugMatrix = camera.combined.cpy().scale(PIXELS_TO_METERS, PIXELS_TO_METERS, 0);
         
@@ -104,6 +111,6 @@ public class GameManager extends ApplicationAdapter {
         physicsDebuger.render(physics, debugMatrix);
 		raysHandler.updateAndRender();
 		
-		physics.step(1/60f, 6, 2);
+		physics.step(1/60f, 8, 4);
 	}
 }
