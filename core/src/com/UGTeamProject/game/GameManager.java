@@ -62,7 +62,7 @@ public class GameManager extends ApplicationAdapter {
 	    Body circle = physics.createBody(circleDef);
 	    
 	    CircleShape circleShape = new CircleShape();
-	    circleShape.setRadius(1f );
+	    circleShape.setRadius(0.5f);
 	    
 	    FixtureDef circleFixture = new FixtureDef();
 	    circleFixture.shape = circleShape;
