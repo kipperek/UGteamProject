@@ -8,33 +8,26 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-public class MainMenuScreen extends ScreenAdapter {
+public class HelpScreen extends ScreenAdapter {
 
 	GameManager game;
 	OrthographicCamera camera;
-	Rectangle playBounds;
-	Rectangle helpBounds;
+	Rectangle mainmenuBounds;
 	Vector3 touchPoint;
 
-    public MainMenuScreen(GameManager game) {
+    public HelpScreen(GameManager game) {
         this.game = game;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
-        playBounds = new Rectangle(325, 275, 100, 50);
-		helpBounds = new Rectangle(325, 200, 100, 50);
+        mainmenuBounds = new Rectangle(325, 375, 175, 50);
 		touchPoint = new Vector3();
 	}
 
 	public void update () {
 		if (Gdx.input.isTouched()) {
 			camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-			
-			if (playBounds.contains(touchPoint.x, touchPoint.y)) {
-				game.setScreen(new GameScreen(game));
-				return;
-			}
-			if (helpBounds.contains(touchPoint.x, touchPoint.y)) {
-				game.setScreen(new HelpScreen(game));
+			if (mainmenuBounds.contains(touchPoint.x, touchPoint.y)) {
+				game.setScreen(new MainMenuScreen(game));
 				return;
 			}
 		}
@@ -49,10 +42,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		game.batcher.begin();
 		game.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		game.font.setScale( 2.0f,2.0f);
-		game.font.draw(game.batcher, "Play", 350, 300);
-		game.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		game.font.setScale( 2.0f,2.0f);
-		game.font.draw(game.batcher, "Help", 350, 225);
+		game.font.draw(game.batcher, "Main menu", 350, 400);
 		game.batcher.end();
 	}
 
@@ -61,4 +51,5 @@ public class MainMenuScreen extends ScreenAdapter {
 		update();
 		draw();
 	}
+	
 }
