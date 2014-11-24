@@ -2,9 +2,8 @@ package com.UGTeamProject.prefab;
 import java.util.ArrayList;
 
 import com.UGTeamProject.prefab.adapters.Physics;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
+import com.UGTeamProject.prefab.adapters.Sound;
+import com.UGTeamProject.prefab.adapters.Texture;
 
 public class GameObject {
 	
@@ -12,24 +11,26 @@ public class GameObject {
 	public static ArrayList<Texture> texture = new ArrayList<Texture>();
 	public static ArrayList<Physics> physics = new ArrayList<Physics>();
 
-	public GameObject(ArrayList<String> textureNames,ArrayList<String> soundNames){
-		
-		Texture item;
-		String newtexture;
-		String newsound;
-		
-		for(int i = 0; i<textureNames.size(); i++)
-		{
-			newtexture = textureNames.get(i);
-			item = new Texture(Gdx.files.internal(newtexture));
-			texture.add(item);
-		}
-		
-		for(int i = 0; i<soundNames.size(); i++)
-		{
-			newsound = soundNames.get(i);
-			sound.add(Gdx.audio.newSound(Gdx.files.internal(newsound)));
-		}
+	public void addTexture(Texture newTexture){
+		texture.add(newTexture);
+	}
+	public void removeTexture(Texture newTexture){
+		texture.remove(newTexture);
+	}
+	
+	public void addSound(Sound newSound){
+		sound.add(newSound);
+	}
+	public void removeSound(Sound newSound){
+		sound.remove(newSound);
+	}
+	
+	public void addPhysics(Physics newPhysics){
+		physics.add(newPhysics);
+	}
+	
+	public void removePhysics(Physics newPhysics){
+		physics.remove(newPhysics);
 	}
 
 }
