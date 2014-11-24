@@ -1,11 +1,12 @@
 package com.UGTeamProject.prefab.adapters;
 
 import com.badlogic.gdx.Gdx;
+import com.UGTeamProject.prefab.interfaces.Drawable;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
-public class Texture {
+public class Texture implements Drawable{
 	
 	private Sprite texture;
 	
