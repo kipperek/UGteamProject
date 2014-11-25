@@ -32,20 +32,36 @@ public class Sound {
 		//counting max distance
 		if ((soundPosition.x - charPosition.x) > distance)
 			distance = soundPosition.x - charPosition.x;
-		else 
+		else if ((charPosition.x - soundPosition.x) > distance)
 			distance = charPosition.x - soundPosition.x ;
 		
 		if ((soundPosition.y - charPosition.y) > distance)
 			distance = soundPosition.y - charPosition.y;
-		else 
+		else if ((charPosition.y - soundPosition.y) > distance)
 			distance = charPosition.y - soundPosition.y;
 		
 		//handling distance
-		if (distance > hearDistance)
-			sound.play(0f);
-		else if (distance > hearDistance/2)
-			sound.play(0.1f);
-		else
-			sound.play(1f);	
-	}	
+		if (distance < hearDistance)
+			sound.play(1f * (50/distance));
+	}
+	
+	public void loop() {
+		sound.loop();
+	}
+	
+	public void stop() {
+		sound.stop();
+	}
+	
+	public void pause() {
+		sound.pause();
+	}
+	
+	public void resume() {
+		sound.resume();
+	}
+	
+	public void dispose() {
+		sound.dispose();
+	}
 }
