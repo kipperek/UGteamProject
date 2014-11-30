@@ -1,16 +1,18 @@
 package com.UGTeamProject.prefab;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import com.UGTeamProject.prefab.adapters.Physics;
 import com.UGTeamProject.prefab.adapters.Sound;
 import com.UGTeamProject.prefab.adapters.Texture;
+import com.UGTeamProject.prefab.adapters.Music;
 
 public class GameObject {
 	
 	public static ArrayList<Sound> sound = new ArrayList<Sound>();
 	public static ArrayList<Texture> texture = new ArrayList<Texture>();
 	public static ArrayList<Physics> physics = new ArrayList<Physics>();
-
+	public static ArrayList<Music> music = new ArrayList<Music>();
+	
 	public void addTexture(Texture newTexture){
 		texture.add(newTexture);
 	}
@@ -31,6 +33,14 @@ public class GameObject {
 	
 	public void removePhysics(Physics newPhysics){
 		physics.remove(newPhysics);
+	}
+	
+	public void addMusic(Music newMusic){
+		music.add(newMusic);
+	}
+	
+	public void removeMusic(Music newMusic){
+		music.remove(newMusic);
 	}
 
 }
