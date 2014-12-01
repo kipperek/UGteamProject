@@ -6,32 +6,20 @@ import com.UGTeamProject.prefab.adapters.Physics;
 import com.UGTeamProject.prefab.adapters.Sound;
 import com.UGTeamProject.prefab.adapters.Texture;
 import com.UGTeamProject.prefab.adapters.Music;
-import com.badlogic.gdx.math.Vector2;
 
 public class GameObject {
 	
-	public static ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-	
-	private Vector2 position;
 	public static ArrayList<Sound> sound = new ArrayList<Sound>();
 	public static ArrayList<Texture> texture = new ArrayList<Texture>();
 	public static ArrayList<Physics> physic = new ArrayList<Physics>();
 	public static ArrayList<Music> music = new ArrayList<Music>();
 	
-	GameObject(ArrayList<Sound> sounds, ArrayList<Texture> textures, 
-			   ArrayList<Physics> physics, ArrayList<Music> musics){
+	GameObject(ArrayList<Sound> sounds, ArrayList<Texture> textures, ArrayList<Physics> physics, ArrayList<Music> musics){
 		
 		sound = sounds;
 		physic = physics;
 		texture = textures;
 		music = musics;
-	}
-	
-	public void addGameObject(GameObject newObject){
-		gameObjects.add(newObject);
-	}
-	public void removeGameObject(GameObject newObject){
-		gameObjects.remove(newObject);
 	}
 	
 	public void addTexture(Texture newTexture){
@@ -63,10 +51,5 @@ public class GameObject {
 	public void removeMusic(Music newMusic){
 		music.remove(newMusic);
 	}
-	
-	
-	public void update(){} 
-	
-	public void draw(){}
 
 }
