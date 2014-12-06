@@ -14,10 +14,8 @@ import com.badlogic.gdx.utils.Logger;
 
 public class Physics {
 	
-	public final static float PIXELS_TO_METERS = 100f;
+	public final static float PIXELS_TO_METERS = 1000f;
 	public final static float GRAVITY = -9.8f;
-	
-	public final static World physics = new World(new Vector2(0, GRAVITY), false);
 	
 	public static enum SHAPE_TYPE{
 		CIRCLE, RECTANGLE, POLYGON, EDGE
@@ -41,15 +39,11 @@ public class Physics {
 	
 	private Filter physicsGroupFilter;
 	
-	private void Initialize(SHAPE_TYPE shapeType, PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, Vector2 position){
+	private void Initialize(World physics, PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, Vector2 position){
 		
-		setShape(shapeType);
-		
-		this.fixture = new FixtureDef();
-		setFixture(density, friction, restitution);
-			
+		this.def = new BodyDef();
 		this.def.type = getMobility(mobility);
-		this.def.position.set(position);
+		this.def.position.set(new Vector2(position.x/PIXELS_TO_METERS, position.y/PIXELS_TO_METERS));
 			
 		this.body = physics.createBody(this.def);
 		this.body.createFixture(this.fixture);
@@ -58,42 +52,79 @@ public class Physics {
 		this.position = this.def.position;
 	}
 	
-	public Physics(PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, float width, float height, Vector2 position){
-		Initialize(SHAPE_TYPE.RECTANGLE, type, mobility, angle, density, friction, restitution, position);
-		
+	public Physics(World physics, PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, float width, float height, Vector2 position){
+		setShape(SHAPE_TYPE.RECTANGLE);
 		PolygonShape a = (PolygonShape)this.shape;
-		a.setAsBox(width, height, new Vector2(position.x/2, position.y/2), angle);
+		a.setAsBox(width/PIXELS_TO_METERS, height/PIXELS_TO_METERS, new Vector2((position.x/2)/PIXELS_TO_METERS, (position.y/2)/PIXELS_TO_METERS), angle);
 		this.shape = a;
+		
+		this.fixture = new FixtureDef();
+		setFixture(a, density, friction, restitution);
+		
+		Initialize(physics, type, mobility, angle, density, friction, restitution, position);
 	}
 	
-	public Physics(PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, float radius, Vector2 position){
-		Initialize(SHAPE_TYPE.CIRCLE, type, mobility, angle, density, friction, restitution, position);
-		
+	public Physics(World physics, PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, float radius, Vector2 position){
+		setShape(SHAPE_TYPE.CIRCLE);
 		CircleShape a = (CircleShape)this.shape;
-		a.setRadius(radius);
+		a.setRadius(radius/PIXELS_TO_METERS);
 		this.shape = a;
 		
-		this.body.setTransform(position.x, position.y, this.angle);
+		this.fixture = new FixtureDef();
+		setFixture(a, density, friction, restitution);
+		
+		Initialize(physics, type, mobility, angle, density, friction, restitution, position);
+		
+		this.body.setTransform(position.x/PIXELS_TO_METERS, position.y/PIXELS_TO_METERS, this.angle);
+		
 	}
 	
-	public Physics(PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, Vector2[] points, Vector2 position, Vector2 origin){
-		Initialize(SHAPE_TYPE.POLYGON, type, mobility, angle, density, friction, restitution, position);
-		
+	public Physics(World physics, PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, Vector2[] points, Vector2 position, Vector2 origin){
+		setShape(SHAPE_TYPE.POLYGON);
 		PolygonShape a = (PolygonShape)this.shape;
-		a.set(points);
 		
-		this.body.setTransform(origin.x, origin.y, this.angle);
+		Vector2 tab[] = new Vector2[points.length];
+		
+		for(int i=0; i<points.length; i++)
+		{
+			tab[i] = new Vector2(points[i].x/PIXELS_TO_METERS, points[i].y/PIXELS_TO_METERS);
+		}
+		a.set(tab);
+		
+		this.fixture = new FixtureDef();
+		setFixture(a, density, friction, restitution);
+		
+		Initialize(physics, type, mobility, angle, density, friction, restitution, position);
+		
+		this.body.setTransform((position.x/PIXELS_TO_METERS) + (origin.x/PIXELS_TO_METERS), (position.y/PIXELS_TO_METERS) + (origin.y/PIXELS_TO_METERS), this.angle);
 	}
 	
-	public Physics(PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, Vector2 startPoint, Vector2[] points, Vector2 endPoint, Vector2 position, Vector2 origin){
+	public Physics(World physics, PHYSICS_TYPE type, MOBILITY_TYPE mobility, Float angle, float density, float friction, float restitution, Vector2 startPoint, Vector2[] points, Vector2 endPoint, Vector2 position, Vector2 origin){
 		// for real it is a chain type
-		Initialize(SHAPE_TYPE.EDGE, type, mobility, angle, density, friction, restitution, position);
-		
+		setShape(SHAPE_TYPE.EDGE);
 		ChainShape a = (ChainShape)this.shape;
-		a.createChain(points);
+		
+		Vector2 tab[] = new Vector2[points.length+2];
+		
+		tab[0] = new Vector2(startPoint.x/PIXELS_TO_METERS, startPoint.y/PIXELS_TO_METERS);
+		
+		for(int i=1; i<points.length-1; i++)
+		{
+			tab[i] = new Vector2(new Vector2(points[i].x/PIXELS_TO_METERS, points[i].y/PIXELS_TO_METERS));
+		}
+		
+		tab[tab.length-1] = new Vector2(endPoint.x/PIXELS_TO_METERS, endPoint.y/PIXELS_TO_METERS);
+		
+		a.createChain(tab);
+		
 		this.shape = a;
 		
-		this.body.setTransform(origin.x, origin.y, this.angle);
+		this.fixture = new FixtureDef();
+		setFixture(a, density, friction, restitution);
+		
+		Initialize(physics, type, mobility, angle, density, friction, restitution, position);
+		
+		this.body.setTransform((position.x/PIXELS_TO_METERS) + (origin.x/PIXELS_TO_METERS), (position.y/PIXELS_TO_METERS) + (origin.y/PIXELS_TO_METERS), this.angle);
 	}
 
 	public Vector2 getPosition() {
@@ -123,10 +154,11 @@ public class Physics {
 		}
 	}
 	
-	private void setFixture(float density, float friction, float restitution)
+	private void setFixture(Shape shape, float density, float friction, float restitution)
 	{
-		fixture.density = density;
-		fixture.friction = friction;
-		fixture.restitution = restitution;
+		this.fixture.shape = shape;
+		this.fixture.density = density;
+		this.fixture.friction = friction;
+		this.fixture.restitution = restitution;
 	}
 }
