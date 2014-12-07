@@ -64,10 +64,5 @@ public class GameObject {
 	public void removeMusic(Music newMusic){
 		music.remove(newMusic);
 	}
-	
-	
-	public void update(){} 
-	
-	public void draw(){}
 
 }
