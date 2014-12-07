@@ -37,5 +37,9 @@ public class Texture implements Drawable{
 	public void draw(Batch batch){
 		texture.draw(batch);
 	}
+	
+	public Vector2 getPosition(){
+		return new Vector2(texture.getX(),texture.getY());
+	}
 
 }
