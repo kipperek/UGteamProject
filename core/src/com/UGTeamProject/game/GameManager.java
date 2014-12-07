@@ -14,6 +14,7 @@ public class GameManager extends Game {
     public void create() {
         batcher = new SpriteBatch();
         font = new BitmapFont();
+        AssetsManager.load();
         setScreen(new MainMenuScreen(this));
     }
 
