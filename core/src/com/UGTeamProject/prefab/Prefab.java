@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 
 public class Prefab {
-	
+
 	public static ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	private Vector2 position;
 	
