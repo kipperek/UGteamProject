@@ -6,6 +6,7 @@ import com.UGTeamProject.prefab.adapters.Physics;
 import com.UGTeamProject.prefab.adapters.Sound;
 import com.UGTeamProject.prefab.adapters.Texture;
 import com.UGTeamProject.prefab.adapters.Music;
+import com.badlogic.gdx.math.Vector2;
 
 public class GameObject {
 	
@@ -13,13 +14,15 @@ public class GameObject {
 	public static ArrayList<Texture> texture = new ArrayList<Texture>();
 	public static ArrayList<Physics> physic = new ArrayList<Physics>();
 	public static ArrayList<Music> music = new ArrayList<Music>();
+	public Vector2 position;
 	
-	GameObject(ArrayList<Sound> sounds, ArrayList<Texture> textures, ArrayList<Physics> physics, ArrayList<Music> musics){
+	GameObject(ArrayList<Sound> sounds, ArrayList<Texture> textures, ArrayList<Physics> physics, ArrayList<Music> musics, float x, float y){
 		
 		sound = sounds;
 		physic = physics;
 		texture = textures;
 		music = musics;
+		position = new Vector2(x,y);
 	}
 	
 	public void addTexture(Texture newTexture){

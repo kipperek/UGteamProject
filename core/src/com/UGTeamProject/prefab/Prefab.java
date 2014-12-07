@@ -16,7 +16,40 @@ public class Prefab {
 		gameObjects.remove(newObject);
 	}
 	
-	public void update(){} 
+	public void moveLeft(float move)
+	{
+		position.set( position.x - move, position.y);
+		
+		for (GameObject gameobj: gameObjects)
+	        gameobj.position.set( position.x - move, position.y);
+	}
+	
+	public void moveRight(float move)
+	{
+		position.set( position.x + move, position.y);
+		
+		for (GameObject gameobj: gameObjects)
+	        gameobj.position.set( position.x + move, position.y);
+		
+	} 
+	
+	public void moveDown(float move)
+	{
+		position.set( position.x, position.y + move);
+		
+		for (GameObject gameobj: gameObjects)
+	        gameobj.position.set( position.x, position.y + move);
+		
+	} 
+	
+	public void moveUp(float move)
+	{
+		position.set( position.x, position.y - move);
+		
+		for (GameObject gameobj: gameObjects)
+	        gameobj.position.set( position.x, position.y - move);
+		
+	} 
 	
 	public void draw(){}
 
