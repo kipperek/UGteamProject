@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Chunk {
-	final static int WIDTH = 1000;
-	final static int HEIGHT = 1000;
+	final static int WIDTH = 1024;
+	final static int HEIGHT = 1024;
 	
 	final private Vector2 position;
 	final private List<Drawable> objects;
@@ -21,6 +21,10 @@ public class Chunk {
 	public Chunk(Vector2 position, List<Drawable>objects, Chunk[][] neighbours){
 		this.position = position;
 		this.objects = objects;
+		this.neighbours = neighbours;
+	}
+	
+	public void setNeighbours(Chunk[][] neighbours){
 		this.neighbours = neighbours;
 	}
 	
