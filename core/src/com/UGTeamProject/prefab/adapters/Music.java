@@ -7,7 +7,7 @@ public class Music {
 
 	private com.badlogic.gdx.audio.Music music;
 	private Vector2 position;
-	private int hearDistance = 300;
+	private int hearDistance = 500;
 	
 	public Music (String resourceName, Vector2 musicPosition) {
 		music = Gdx.audio.newMusic(Gdx.files.internal(resourceName));
@@ -28,30 +28,34 @@ public class Music {
 		music.setVolume(volume);
 	}
 	
-    public void play(Vector2 musicPosition, Vector2 charPosition) {
+        public void play(Vector2 musicPosition, float charPositionX, float charPositionY) {
 		
 		//volume range 0 - 1
 		float distance = 0;
 		
 		//counting max distance
-		if ((musicPosition.x - charPosition.x) > distance)
-			distance = musicPosition.x - charPosition.x;
-		else if ((charPosition.x - musicPosition.x) > distance)
-			distance = charPosition.x - musicPosition.x ;
+		if ((musicPosition.x - charPositionX) > distance)
+			distance = musicPosition.x - charPositionX;
+		else if ((charPositionX - musicPosition.x) > distance)
+			distance = charPositionX - musicPosition.x ;
 		
-		if ((musicPosition.y - charPosition.y) > distance)
-			distance = musicPosition.y - charPosition.y;
-		else if ((charPosition.y - musicPosition.y) > distance)
-			distance = charPosition.y - musicPosition.y;
+		if ((musicPosition.y - charPositionY) > distance)
+			distance = musicPosition.y - charPositionY;
+		else if ((charPositionY - musicPosition.y) > distance)
+			distance = charPositionY - musicPosition.y;
+		
+		music.play();
 		
 		//handling distance
 		if (distance < hearDistance){
-			music.setVolume(1f * (50/distance));
-			music.play();
+			//System.out.println("Distance: " + distance);
+			music.setVolume(1f * (100/distance));
 		}
+		else
+			music.setVolume(0f);
 	}
     
-    public void setLooping() {
+        public void setLooping() {
 		music.setLooping(true);
 	}
 	
