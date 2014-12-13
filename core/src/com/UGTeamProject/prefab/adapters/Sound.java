@@ -7,7 +7,7 @@ public class Sound {
 	
 	private com.badlogic.gdx.audio.Sound sound;
 	private Vector2 position;
-	private int hearDistance = 300;
+	private int hearDistance = 500;
 	
 	public Sound (String resourceName, Vector2 soundPosition) {
 		sound = Gdx.audio.newSound(Gdx.files.internal(resourceName));
@@ -24,21 +24,21 @@ public class Sound {
 		sound.play();
 	}
 	
-	public void play(Vector2 soundPosition, Vector2 charPosition) {
+	public void play(Vector2 soundPosition, float charPositionX, float charPositionY) {
 		
 		//volume range 0 - 1
 		float distance = 0;
 		
 		//counting max distance
-		if ((soundPosition.x - charPosition.x) > distance)
-			distance = soundPosition.x - charPosition.x;
-		else if ((charPosition.x - soundPosition.x) > distance)
-			distance = charPosition.x - soundPosition.x ;
+		if ((soundPosition.x - charPositionX) > distance)
+			distance = soundPosition.x - charPositionX;
+		else if ((charPositionX - soundPosition.x) > distance)
+			distance = charPositionX - soundPosition.x ;
 		
-		if ((soundPosition.y - charPosition.y) > distance)
-			distance = soundPosition.y - charPosition.y;
-		else if ((charPosition.y - soundPosition.y) > distance)
-			distance = charPosition.y - soundPosition.y;
+		if ((soundPosition.y - charPositionY) > distance)
+			distance = soundPosition.y - charPositionY;
+		else if ((charPositionY - soundPosition.y) > distance)
+			distance = charPositionY - soundPosition.y;
 		
 		//handling distance
 		if (distance < hearDistance)
