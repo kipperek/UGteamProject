@@ -9,9 +9,9 @@ public class ScreenInput {
 	
 	public static Actor player;
 
-	public ScreenInput(Actor newplayer)
+	public ScreenInput(Actor newPlayer)
 	{
-		player = newplayer;
+		player = newPlayer;
 	}
 	
 	public void listen()
@@ -35,9 +35,9 @@ public class ScreenInput {
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
 	        player.setX(player.getX() + 200 * Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Keys.UP)) 
-	        player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
-		if(Gdx.input.isKeyPressed(Keys.DOWN)) 
 	        player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
+		if(Gdx.input.isKeyPressed(Keys.DOWN)) 
+	        player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
 		
 	}
 }
