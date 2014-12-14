@@ -28,8 +28,8 @@ public class ScreenInput {
 	    Drawable touchKnob;
 	    
 		touchpadSkin = new Skin();
-        touchpadSkin.add("touchBackground", new Texture("data/touchBackground.png"));
-        touchpadSkin.add("touchKnob", new Texture("data/touchKnob.png"));
+        touchpadSkin.add("touchBackground", AssetsManager.touchBackground);
+        touchpadSkin.add("touchKnob", AssetsManager.touchKnob);
         touchpadStyle = new TouchpadStyle();
         touchBackground = touchpadSkin.getDrawable("touchBackground");
         touchKnob = touchpadSkin.getDrawable("touchKnob");
