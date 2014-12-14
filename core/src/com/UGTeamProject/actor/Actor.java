@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class Actor {
 
 	protected Rectangle actor;
+	protected int life = 100;
 	
 	public Actor() {
 		actor = new Rectangle();

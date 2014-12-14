@@ -1,7 +1,6 @@
 package com.UGTeamProject.screen;
 
 import java.util.ArrayList;
-
 import com.UGTeamProject.actor.Actor;
 import com.UGTeamProject.actor.Character;
 import com.UGTeamProject.game.AssetsManager;
@@ -18,7 +17,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 public class GameScreen extends ScreenAdapter {
 
-	OrthographicCamera camera;
+    OrthographicCamera camera;
     GameManager game;
     Actor player;
     ScreenInput updateActor;
@@ -35,6 +34,7 @@ public class GameScreen extends ScreenAdapter {
     	camera.setToOrtho(false, 400, 300);
     	player = new Character();
     	updateActor = new ScreenInput(player);
+
     	leftanalog = ScreenInput.initTouchpad();
     	map = new Map();
     	
@@ -65,3 +65,5 @@ public class GameScreen extends ScreenAdapter {
 		game.batcher.end();
 	}
 }
+
+
