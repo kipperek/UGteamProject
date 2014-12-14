@@ -21,7 +21,7 @@ public class GameScreen extends ScreenAdapter {
     GameManager game;
     Actor player;
     ScreenInput updateActor;
-    //Touchpad leftanalog;
+    Touchpad leftanalog;
     Map map;
     
     GameObject radio;
@@ -35,7 +35,7 @@ public class GameScreen extends ScreenAdapter {
     	player = new Character();
     	updateActor = new ScreenInput(player);
 
-    	//leftanalog = ScreenInput.initTouchpad();
+    	leftanalog = ScreenInput.initTouchpad();
     	map = new Map();
     	
     	music.add(AssetsManager.radioMusic); // ???
@@ -59,7 +59,7 @@ public class GameScreen extends ScreenAdapter {
 		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
 		AssetsManager.radioTexture.draw(game.batcher, radio.position.x, radio.position.y);
 		radio.music.get(0).play(radio.position, player.getX(), player.getY()); // ???
-		//leftanalog.draw(game.batcher, 15);
+		leftanalog.draw(game.batcher, 15);
 		updateActor.listen();
 		
 		game.batcher.end();
