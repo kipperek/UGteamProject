@@ -2,13 +2,12 @@ package com.UGTeamProject.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.UGTeamProject.actor.Actor;
-import com.UGTeamProject.prefab.adapters.Texture;
+import com.UGTeamProject.game.AssetsManager;
 
 public class ScreenInput {
 	
