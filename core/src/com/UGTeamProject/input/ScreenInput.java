@@ -2,6 +2,7 @@ package com.UGTeamProject.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
@@ -18,7 +19,7 @@ public class ScreenInput {
 		player = newPlayer;
 	}
 	
-	public static Touchpad initTouchpad()
+	public static Touchpad initTouchpad(float x, float y)
 	{
 		Touchpad touchpad;
 	    TouchpadStyle touchpadStyle;
@@ -34,28 +35,19 @@ public class ScreenInput {
         touchKnob = touchpadSkin.getDrawable("touchKnob");
         touchpadStyle.background = touchBackground;
         touchpadStyle.knob = touchKnob;
-        touchpad = new Touchpad(10, touchpadStyle);
-        touchpad.setBounds(15, 15, 200, 200);
+        touchpad = new Touchpad(1, touchpadStyle);
+        touchpad.setBounds(x - 150, y - 50, 50, 50);
         
 		return touchpad;
 	}
 	
-	public void listen()
+	public void listen(Touchpad leftAnalog)
 	{
-		if(Gdx.input.isTouched()) {
-	         Vector3 touchPos = new Vector3();
-	         touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-	         
-	         if(touchPos.x > player.getX())
-	        	 player.setX(player.getX() + 200 * Gdx.graphics.getDeltaTime());
-	         else
-	        	 player.setX(player.getX() - 200 * Gdx.graphics.getDeltaTime());
-	         if(touchPos.y > player.getY())
-	        	 player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
-	         else
-	        	 player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
-	      }
-		
+		player.setX(player.getX() + leftAnalog.getKnobPercentX()*5);
+		leftAnalog.setX((player.getX() - 150) + leftAnalog.getKnobPercentX()*5);
+        player.setY(player.getY() + leftAnalog.getKnobPercentY()*5);
+        leftAnalog.setY((player.getY() - 50) + leftAnalog.getKnobPercentY()*5);
+        
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) 
 	        player.setX(player.getX() - 200 * Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
