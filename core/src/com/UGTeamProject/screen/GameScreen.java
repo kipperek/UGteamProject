@@ -15,12 +15,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 public class GameScreen extends ScreenAdapter {
 
 	OrthographicCamera camera;
     GameManager game;
     Actor player;
     ScreenInput updateActor;
+    Touchpad leftanalog;
     Map map;
     
     GameObject radio;
@@ -33,6 +35,7 @@ public class GameScreen extends ScreenAdapter {
     	camera.setToOrtho(false, 400, 300);
     	player = new Character();
     	updateActor = new ScreenInput(player);
+    	leftanalog = ScreenInput.initTouchpad();
     	map = new Map();
     	
     	music.add(AssetsManager.radioMusic); // ???
@@ -56,6 +59,7 @@ public class GameScreen extends ScreenAdapter {
 		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
 		AssetsManager.radioTexture.draw(game.batcher, radio.position.x, radio.position.y);
 		radio.music.get(0).play(radio.position, player.getX(), player.getY()); // ???
+		leftanalog.draw(game.batcher, 15);
 		updateActor.listen();
 		
 		game.batcher.end();
