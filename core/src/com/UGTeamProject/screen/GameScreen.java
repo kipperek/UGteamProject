@@ -8,6 +8,7 @@ import com.UGTeamProject.game.GameManager;
 import com.UGTeamProject.game.GameObjectManager;
 import com.UGTeamProject.input.ScreenInput;
 import com.UGTeamProject.map.Map;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
@@ -34,11 +35,14 @@ public class GameScreen extends ScreenAdapter {
     	player = new Character();
     	updateActor = new ScreenInput(player);
     	newport = new FitViewport(400, 300, camera);
-    	leftAnalog = ScreenInput.initTouchpad(player.getX(),player.getY());
-    	map = new Map();
-    	GameObjectManager.load();
     	stage = new Stage(newport,game.batcher);
-        stage.addActor(leftAnalog);            
+    	if(Gdx.app.getType() == ApplicationType.Android)
+    	{
+    		leftAnalog = ScreenInput.initTouchpad(player.getX(),player.getY());
+    		stage.addActor(leftAnalog);
+    	}
+    	map = new Map();
+    	GameObjectManager.load();  
         Gdx.input.setInputProcessor(stage);
     }
 	
@@ -58,11 +62,15 @@ public class GameScreen extends ScreenAdapter {
 		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
 		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);
 		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY()); 
-		updateActor.listen(leftAnalog);
+		if(Gdx.app.getType() == ApplicationType.Android)
+			updateActor.listen(leftAnalog);
+		else if(Gdx.app.getType() == ApplicationType.Desktop)
+			updateActor.listen();
 		game.batcher.end();
 		stage.act(Gdx.graphics.getDeltaTime());        
         stage.draw();
 	}
 }
+
 
 
