@@ -14,4 +14,9 @@ public class Character extends Actor {
 		actor.x = MathUtils.random(0,1000);
 		actor.y = MathUtils.random(0,1000); 
 	}
+	
+	public void die() {
+		if(life <= 0)
+	        spawn();
+	}
 }
