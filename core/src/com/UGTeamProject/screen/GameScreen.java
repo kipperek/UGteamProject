@@ -12,14 +12,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 public class GameScreen extends ScreenAdapter {
 
     OrthographicCamera camera;
     GameManager game;
     Actor player;
+    Stage stage;
+    Viewport newport;
     ScreenInput updateActor;
-    Touchpad leftanalog;
+    Touchpad leftAnalog;
     Map map;
     
     public GameScreen (GameManager game) {
@@ -28,10 +33,13 @@ public class GameScreen extends ScreenAdapter {
     	camera.setToOrtho(false, 400, 300);
     	player = new Character();
     	updateActor = new ScreenInput(player);
-
-    	leftanalog = ScreenInput.initTouchpad();
+    	newport = new FitViewport(400, 300, camera);
+    	leftAnalog = ScreenInput.initTouchpad(player.getX(),player.getY());
     	map = new Map();
     	GameObjectManager.load();
+    	stage = new Stage(newport,game.batcher);
+        stage.addActor(leftAnalog);            
+        Gdx.input.setInputProcessor(stage);
     }
 	
 	@Override
@@ -50,10 +58,10 @@ public class GameScreen extends ScreenAdapter {
 		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
 		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);
 		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY()); 
-		leftanalog.draw(game.batcher, 15);
-		updateActor.listen();
-		
+		updateActor.listen(leftAnalog);
 		game.batcher.end();
+		stage.act(Gdx.graphics.getDeltaTime());        
+        stage.draw();
 	}
 }
 
