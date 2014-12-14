@@ -19,7 +19,7 @@ public class ScreenInput {
 		player = newPlayer;
 	}
 	
-	public Touchpad initTouchpad()
+	public static Touchpad initTouchpad()
 	{
 		Touchpad touchpad;
 	    TouchpadStyle touchpadStyle;
