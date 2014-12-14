@@ -1,43 +1,67 @@
-package com.UGTeamProject.input;
+package com.UGTeamProject.screen;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.math.Vector3;
+import java.util.ArrayList;
 import com.UGTeamProject.actor.Actor;
+import com.UGTeamProject.actor.Character;
+import com.UGTeamProject.game.AssetsManager;
+import com.UGTeamProject.game.GameManager;
+import com.UGTeamProject.game.GameObjectManager;
+import com.UGTeamProject.input.ScreenInput;
+import com.UGTeamProject.map.Map;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+public class GameScreen extends ScreenAdapter {
 
-public class ScreenInput {
+    OrthographicCamera camera;
+    GameManager game;
+    Actor player;
+    Stage stage;
+    Viewport newport;
+    ScreenInput updateActor;
+    Touchpad leftAnalog;
+    Map map;
+    
+    public GameScreen (GameManager game) {
+    	this.game = game;	
+    	camera = new OrthographicCamera(800, 600);
+    	camera.setToOrtho(false, 400, 300);
+    	player = new Character();
+    	updateActor = new ScreenInput(player);
+    	newport = new FitViewport(400, 300, camera);
+    	leftAnalog = ScreenInput.initTouchpad(player.getX(),player.getY());
+    	map = new Map();
+    	GameObjectManager.load();
+    	stage = new Stage(newport,game.batcher);
+        stage.addActor(leftAnalog);            
+        Gdx.input.setInputProcessor(stage);
+    }
 	
-	public static Actor player;
-
-	public ScreenInput(Actor newPlayer)
-	{
-		player = newPlayer;
-	}
-	
-	public void listen()
-	{
-		if(Gdx.input.isTouched()) {
-	         Vector3 touchPos = new Vector3();
-	         touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-	         
-	         if(touchPos.x > player.getX())
-	        	 player.setX(player.getX() + 200 * Gdx.graphics.getDeltaTime());
-	         else
-	        	 player.setX(player.getX() - 200 * Gdx.graphics.getDeltaTime());
-	         if(touchPos.y > player.getY())
-	        	 player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
-	         else
-	        	 player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
-	      }
+	@Override
+	public void render (float delta) {
+		Gdx.gl.glClearColor(0.09f, 0.28f, 0.2f, 1);
+		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+			
+		camera.position.set(player.getX() + player.getWidth()/2, player.getY() + 75, 0);
+	    camera.update();
+	    game.batcher.setProjectionMatrix(camera.combined);
 		
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) 
-	        player.setX(player.getX() - 200 * Gdx.graphics.getDeltaTime());
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
-	        player.setX(player.getX() + 200 * Gdx.graphics.getDeltaTime());
-		if(Gdx.input.isKeyPressed(Keys.UP)) 
-	        player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
-		if(Gdx.input.isKeyPressed(Keys.DOWN)) 
-	        player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
-		
+		game.batcher.begin();
+		map.draw(game.batcher);
+		game.font.setScale( 0.6f,0.6f);
+		game.font.draw(game.batcher, "X: " + player.getX() + "Y: " + player.getY(), player.getX() - 150, player.getY() + 200);      
+		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
+		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);
+		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY()); 
+		//leftanalog.draw(game.batcher, 15);
+		updateActor.listen(leftAnalog);
+		game.batcher.end();
+		stage.act(Gdx.graphics.getDeltaTime());        
+        stage.draw();
 	}
 }
