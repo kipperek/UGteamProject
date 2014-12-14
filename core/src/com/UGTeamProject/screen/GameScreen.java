@@ -5,11 +5,9 @@ import com.UGTeamProject.actor.Actor;
 import com.UGTeamProject.actor.Character;
 import com.UGTeamProject.game.AssetsManager;
 import com.UGTeamProject.game.GameManager;
+import com.UGTeamProject.game.GameObjectManager;
 import com.UGTeamProject.input.ScreenInput;
 import com.UGTeamProject.map.Map;
-import com.UGTeamProject.prefab.GameObject;
-import com.UGTeamProject.prefab.adapters.Music;
-import com.UGTeamProject.prefab.adapters.Texture;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
@@ -24,10 +22,6 @@ public class GameScreen extends ScreenAdapter {
     Touchpad leftanalog;
     Map map;
     
-    GameObject radio;
-    ArrayList<Texture> texture = new ArrayList<Texture>(); // ???
-    ArrayList<Music> music = new ArrayList<Music>(); // ???
-    
     public GameScreen (GameManager game) {
     	this.game = game;	
     	camera = new OrthographicCamera(800, 600);
@@ -37,10 +31,7 @@ public class GameScreen extends ScreenAdapter {
 
     	leftanalog = ScreenInput.initTouchpad();
     	map = new Map();
-    	
-    	music.add(AssetsManager.radioMusic); // ???
-        texture.add(AssetsManager.radioTexture); // ???
-    	radio = new GameObject(null, texture, null, music, 333, 333);
+    	GameObjectManager.load();
     }
 	
 	@Override
@@ -57,8 +48,8 @@ public class GameScreen extends ScreenAdapter {
 		game.font.setScale( 0.6f,0.6f);
 		game.font.draw(game.batcher, "X: " + player.getX() + "Y: " + player.getY(), player.getX() - 150, player.getY() + 200);      
 		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
-		AssetsManager.radioTexture.draw(game.batcher, radio.position.x, radio.position.y);
-		radio.music.get(0).play(radio.position, player.getX(), player.getY()); // ???
+		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);
+		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY()); 
 		leftanalog.draw(game.batcher, 15);
 		updateActor.listen();
 		
