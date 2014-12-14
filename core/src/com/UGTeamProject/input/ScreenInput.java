@@ -47,7 +47,9 @@ public class ScreenInput {
 		leftAnalog.setX((player.getX() - 150) + leftAnalog.getKnobPercentX()*5);
         player.setY(player.getY() + leftAnalog.getKnobPercentY()*5);
         leftAnalog.setY((player.getY() - 50) + leftAnalog.getKnobPercentY()*5);
-        
+	}
+	public void listen()
+	{
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) 
 	        player.setX(player.getX() - 200 * Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
@@ -56,6 +58,5 @@ public class ScreenInput {
 	        player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Keys.DOWN)) 
 	        player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
-		
 	}
 }
