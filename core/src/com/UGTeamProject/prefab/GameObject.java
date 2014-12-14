@@ -10,10 +10,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GameObject {
 
-	public static ArrayList<Sound> sound = new ArrayList<Sound>();
-	public static ArrayList<Texture> texture = new ArrayList<Texture>();
-	public static ArrayList<Physics> physic = new ArrayList<Physics>();
-	public static ArrayList<Music> music = new ArrayList<Music>();
+	public ArrayList<Sound> sound = new ArrayList<Sound>();
+	public ArrayList<Texture> texture = new ArrayList<Texture>();
+	public ArrayList<Physics> physic = new ArrayList<Physics>();
+	public ArrayList<Music> music = new ArrayList<Music>();
 	public Vector2 position;
 	
 	public GameObject(ArrayList<Sound> sounds, ArrayList<Texture> textures, ArrayList<Physics> physics, ArrayList<Music> musics, float x, float y){
