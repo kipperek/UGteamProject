@@ -3,7 +3,12 @@ package com.UGTeamProject.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.UGTeamProject.actor.Actor;
+import com.UGTeamProject.prefab.adapters.Texture;
 
 public class ScreenInput {
 	
@@ -12,6 +17,28 @@ public class ScreenInput {
 	public ScreenInput(Actor newPlayer)
 	{
 		player = newPlayer;
+	}
+	
+	public Touchpad initTouchpad()
+	{
+		Touchpad touchpad;
+	    TouchpadStyle touchpadStyle;
+	    Skin touchpadSkin;
+	    Drawable touchBackground;
+	    Drawable touchKnob;
+	    
+		touchpadSkin = new Skin();
+        touchpadSkin.add("touchBackground", new Texture("data/touchBackground.png"));
+        touchpadSkin.add("touchKnob", new Texture("data/touchKnob.png"));
+        touchpadStyle = new TouchpadStyle();
+        touchBackground = touchpadSkin.getDrawable("touchBackground");
+        touchKnob = touchpadSkin.getDrawable("touchKnob");
+        touchpadStyle.background = touchBackground;
+        touchpadStyle.knob = touchKnob;
+        touchpad = new Touchpad(10, touchpadStyle);
+        touchpad.setBounds(15, 15, 200, 200);
+        
+		return touchpad;
 	}
 	
 	public void listen()
