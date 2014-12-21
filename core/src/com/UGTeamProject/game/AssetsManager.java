@@ -1,10 +1,21 @@
 package com.UGTeamProject.game;
 
+import java.util.TreeMap;
+
+import com.UGTeamProject.prefab.adapters.Animation;
 import com.UGTeamProject.prefab.adapters.Music;
+import com.UGTeamProject.prefab.adapters.Physics;
+import com.UGTeamProject.prefab.adapters.Sound;
 import com.UGTeamProject.prefab.adapters.Texture;
 
 public class AssetsManager {
-
+	
+	public static TreeMap<String, Texture> textures = new TreeMap<String, Texture>();
+	public static TreeMap<String, Sound> sounds = new TreeMap<String, Sound>();
+	public static TreeMap<String, Music> music = new TreeMap<String, Music>();
+	public static TreeMap<String, Physics> physics = new TreeMap<String, Physics>();
+	public static TreeMap<String, Animation> animations = new TreeMap<String, Animation>();
+	
 	public static Texture playerTexture;
 	public static Texture grassTexture;
 	public static Texture radioTexture;
@@ -14,6 +25,8 @@ public class AssetsManager {
 	public static Music radioMusic;
 	
 	public static void load() {
+		
+		
 		
 		playerTexture = new Texture("sprites/bohater.png");
 		grassTexture = new Texture("sprites/grass.png");
