@@ -47,8 +47,8 @@ public class AssetsManager {
 		try{
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(Gdx.files.internal("objects.json").file());
-			doc.getDocumentElement().normalize();
+			Document doc = db.parse(Gdx.files.internal("objects.xml").file());
+			//doc.getDocumentElement().normalize();
 			
 			NodeList nodeLst = doc.getElementsByTagName("item");
 			
@@ -62,9 +62,9 @@ public class AssetsManager {
 					Element type = (Element) item.getElementsByTagName("type").item(0);
 
 					switch(type.getNodeValue()){
-					case "Texture": textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file"))); break;
+					case "Texture": textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue())); break;
 					case "Sound": break;
-					case "Music": music.put(name, new Music("music/" + item.getElementsByTagName("file"))); break;
+					case "Music": music.put(name, new Music("music/" + item.getElementsByTagName("file").item(0).getNodeValue())); break;
 					case "Physics": break;
 					case "Animation": break;
 					default: new Logger("bad type name in objects.xml: " + type.getNodeValue(), Logger.ERROR); break;
