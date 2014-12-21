@@ -41,5 +41,9 @@ public class Texture implements Drawable{
 	public Vector2 getPosition(){
 		return new Vector2(texture.getX(),texture.getY());
 	}
+	
+	public com.badlogic.gdx.graphics.Texture getTexture(){
+		return this.texture.getTexture();
+	}
 
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<item name="playerTexture">
+    <type>Texture</type>
+    <file>radio.png</file>
+</item>
+<item name="grassTexture">
+    <type>Texture</type>
+    <file>grass.png</file>
+</item>
+<item name="radioTexture">
+    <type>Texture</type>
+    <file>radio.png</file>
+</item>
+<item name="npcTexture">
+    <type>Texture</type>
+    <file>npc.png</file>
+</item>
+<item name="touchBackground">
+    <type>Texture</type>
+    <file>touchBackground.png</file>
+</item>
+<item name="touchKnob">
+    <type>Texture</type>
+    <file>touchKnob.png</file>
+</item>
+<item name="radioMusic">
+    <type>Music</type>
+    <file>radio.mp3</file>
+</item>
