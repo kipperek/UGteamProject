@@ -7,6 +7,7 @@ import com.UGTeamProject.prefab.adapters.Music;
 import com.UGTeamProject.prefab.adapters.Physics;
 import com.UGTeamProject.prefab.adapters.Sound;
 import com.UGTeamProject.prefab.adapters.Texture;
+import com.badlogic.gdx.utils.XmlReader;
 
 public class AssetsManager {
 	
@@ -26,8 +27,6 @@ public class AssetsManager {
 	
 	public static void load() {
 		
-		
-		
 		playerTexture = new Texture("sprites/bohater.png");
 		grassTexture = new Texture("sprites/grass.png");
 		radioTexture = new Texture("sprites/radio.jpg");
@@ -35,5 +34,6 @@ public class AssetsManager {
 		touchBackground = new Texture("sprites/touchBackground.png").getTexture();
 	    touchKnob = new Texture("sprites/touchKnob.png").getTexture();
 		radioMusic = new Music("music/radio.mp3"); 
+
 	}
 }
