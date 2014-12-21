@@ -1,5 +1,6 @@
 package com.UGTeamProject.actor;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Actor {
@@ -41,5 +42,17 @@ public class Actor {
 	
 	public void setHeight(float height) {
 		actor.height = height;
+	}
+	
+	public void act(Actor player) {
+		 if(player.getY() > actor.y)
+			 actor.y += 100 * Gdx.graphics.getDeltaTime();
+        else
+       	 actor.y -= 100 * Gdx.graphics.getDeltaTime();
+        
+        if(player.getX() > actor.x)
+       	 actor.x += 100 * Gdx.graphics.getDeltaTime();
+        else
+       	 actor.x -= 100 * Gdx.graphics.getDeltaTime();
 	}
 }

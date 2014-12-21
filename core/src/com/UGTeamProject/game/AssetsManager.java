@@ -2,7 +2,6 @@ package com.UGTeamProject.game;
 
 import com.UGTeamProject.prefab.adapters.Music;
 import com.UGTeamProject.prefab.adapters.Texture;
-import com.badlogic.gdx.math.Vector2;
 
 public class AssetsManager {
 
