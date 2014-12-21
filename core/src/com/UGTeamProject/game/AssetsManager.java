@@ -2,12 +2,19 @@ package com.UGTeamProject.game;
 
 import java.util.TreeMap;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
 import com.UGTeamProject.prefab.adapters.Animation;
 import com.UGTeamProject.prefab.adapters.Music;
 import com.UGTeamProject.prefab.adapters.Physics;
 import com.UGTeamProject.prefab.adapters.Sound;
 import com.UGTeamProject.prefab.adapters.Texture;
-import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Logger;
 
 public class AssetsManager {
 	
@@ -34,6 +41,17 @@ public class AssetsManager {
 		touchBackground = new Texture("sprites/touchBackground.png").getTexture();
 	    touchKnob = new Texture("sprites/touchKnob.png").getTexture();
 		radioMusic = new Music("music/radio.mp3"); 
-
+		
+		try{
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(Gdx.files.internal("objects.json").file());
+			doc.getDocumentElement().normalize();
+			
+			NodeList nodeLst = doc.getElementsByTagName("item");
+			
+		} catch(Exception e){
+			new Logger("problems with objects xml file", Logger.ERROR);
+		}
 	}
 }
