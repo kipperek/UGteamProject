@@ -62,9 +62,9 @@ public class AssetsManager {
 					Element type = (Element) item.getElementsByTagName("type").item(0);
 
 					switch(type.getNodeValue()){
-					case "Texture": break;
+					case "Texture": textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file"))); break;
 					case "Sound": break;
-					case "Music": break;
+					case "Music": music.put(name, new Music("music/" + item.getElementsByTagName("file"))); break;
 					case "Physics": break;
 					case "Animation": break;
 					default: new Logger("bad type name in objects.xml: " + type.getNodeValue(), Logger.ERROR); break;
