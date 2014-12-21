@@ -19,8 +19,8 @@ public class AssetsManager {
 		grassTexture = new Texture("sprites/grass.png");
 		radioTexture = new Texture("sprites/radio.jpg");
 		npcTexture = new Texture("sprites/npc.png");
-		touchBackground = new com.badlogic.gdx.graphics.Texture("sprites/touchBackground.png");
-	    touchKnob = new com.badlogic.gdx.graphics.Texture("sprites/touchKnob.png");
+		touchBackground = new Texture("sprites/touchBackground.png").getTexture();
+	    touchKnob = new Texture("sprites/touchKnob.png").getTexture();
 		radioMusic = new Music("music/radio.mp3"); 
 	}
 }
