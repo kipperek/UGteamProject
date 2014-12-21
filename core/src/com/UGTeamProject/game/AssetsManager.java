@@ -6,6 +6,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.UGTeamProject.prefab.adapters.Animation;
@@ -49,6 +51,26 @@ public class AssetsManager {
 			doc.getDocumentElement().normalize();
 			
 			NodeList nodeLst = doc.getElementsByTagName("item");
+			
+			for(int i=0; i<nodeLst.getLength(); i++)
+			{
+				Node node = nodeLst.item(i);
+				
+				if (node.getNodeType() == Node.ELEMENT_NODE){
+					Element item = (Element) node;
+					String name = item.getAttribute("name");
+					Element type = (Element) item.getElementsByTagName("type").item(0);
+
+					switch(type.getNodeValue()){
+					case "Texture": break;
+					case "Sound": break;
+					case "Music": break;
+					case "Physics": break;
+					case "Animation": break;
+					default: new Logger("bad type name in objects.xml: " + type.getNodeValue(), Logger.ERROR); break;
+					}
+				}
+			}
 			
 		} catch(Exception e){
 			new Logger("problems with objects xml file", Logger.ERROR);
