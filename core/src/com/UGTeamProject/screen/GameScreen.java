@@ -1,8 +1,8 @@
 package com.UGTeamProject.screen;
 
-import java.util.ArrayList;
 import com.UGTeamProject.actor.Actor;
 import com.UGTeamProject.actor.Character;
+import com.UGTeamProject.actor.NPC;
 import com.UGTeamProject.game.AssetsManager;
 import com.UGTeamProject.game.GameManager;
 import com.UGTeamProject.game.GameObjectManager;
@@ -17,11 +17,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
 public class GameScreen extends ScreenAdapter {
 
     OrthographicCamera camera;
     GameManager game;
     Actor player;
+    Actor npc;
     Stage stage;
     Viewport newport;
     ScreenInput updateActor;
@@ -33,6 +35,7 @@ public class GameScreen extends ScreenAdapter {
     	camera = new OrthographicCamera(800, 600);
     	camera.setToOrtho(false, 400, 300);
     	player = new Character();
+    	npc = new NPC();
     	updateActor = new ScreenInput(player);
     	newport = new FitViewport(400, 300, camera);
     	stage = new Stage(newport,game.batcher);
@@ -56,21 +59,23 @@ public class GameScreen extends ScreenAdapter {
 	    game.batcher.setProjectionMatrix(camera.combined);
 		
 		game.batcher.begin();
+		
 		map.draw(game.batcher);
 		game.font.setScale( 0.6f,0.6f);
 		game.font.draw(game.batcher, "X: " + player.getX() + "Y: " + player.getY(), player.getX() - 150, player.getY() + 200);      
 		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
+		AssetsManager.npcTexture.draw(game.batcher, npc.getX(), npc.getY());	
 		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);
 		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY()); 
+		
 		if(Gdx.app.getType() == ApplicationType.Android)
 			updateActor.listen(leftAnalog);
 		else if(Gdx.app.getType() == ApplicationType.Desktop)
 			updateActor.listen();
+		
 		game.batcher.end();
-		stage.act(Gdx.graphics.getDeltaTime());        
+		stage.act(Gdx.graphics.getDeltaTime());    
+		npc.act(player);
         stage.draw();
 	}
 }
-
-
-
