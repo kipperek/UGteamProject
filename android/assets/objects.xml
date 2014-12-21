@@ -15,3 +15,15 @@
     <type>Texture</type>
     <file>npc.png</file>
 </item>
+<item id="touchBackground">
+    <type>Texture</type>
+    <file>touchBackground.png</file>
+</item>
+<item id="touchKnob">
+    <type>Texture</type>
+    <file>touchKnob.png</file>
+</item>
+<item id="radioMusic">
+    <type>Music</type>
+    <file>radio.mp3</file>
+</item>
