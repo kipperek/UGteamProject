@@ -57,16 +57,19 @@ public class GameScreen extends ScreenAdapter {
 		camera.position.set(player.getX() + player.getWidth()/2, player.getY() + 75, 0);
 	    camera.update();
 	    game.batcher.setProjectionMatrix(camera.combined);
-		
-		game.batcher.begin();
-		
+	    
+	    game.batcher.disableBlending();
+	    game.batcher.begin();
 		map.draw(game.batcher);
+		game.batcher.end();
+		
+		game.batcher.enableBlending();
+		game.batcher.begin();
 		game.font.setScale( 0.6f,0.6f);
 		game.font.draw(game.batcher, "X: " + player.getX() + "Y: " + player.getY(), player.getX() - 150, player.getY() + 200);      
+		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);	
 		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
 		AssetsManager.npcTexture.draw(game.batcher, npc.getX(), npc.getY());	
-		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);
-		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY()); 
 		
 		if(Gdx.app.getType() == ApplicationType.Android)
 			updateActor.listen(leftAnalog);
@@ -74,6 +77,8 @@ public class GameScreen extends ScreenAdapter {
 			updateActor.listen();
 		
 		game.batcher.end();
+		
+		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY()); 
 		stage.act(Gdx.graphics.getDeltaTime());    
 		npc.act(player);
         stage.draw();
