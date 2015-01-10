@@ -1,5 +1,6 @@
 package com.UGTeamProject.screen;
 
+import com.UGTeamProject.game.AssetsManager;
 import com.UGTeamProject.game.GameManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -16,12 +17,12 @@ public class MainMenuScreen extends ScreenAdapter {
 	Rectangle helpBounds;
 	Vector3 touchPoint;
 
-    public MainMenuScreen(GameManager game) {
-        this.game = game;
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
-        playBounds = new Rectangle(325, 275, 100, 50);
-		helpBounds = new Rectangle(325, 200, 100, 50);
+         public MainMenuScreen(GameManager game) {
+                this.game = game;
+                camera = new OrthographicCamera(320, 480);
+	        camera.position.set(320 / 2, 480 / 2, 0);
+	        playBounds = new Rectangle(160 - 150, 200 + 18, 300, 36);
+		helpBounds = new Rectangle(160 - 150, 200 - 18 - 36, 300, 36);
 		touchPoint = new Vector3();
 	}
 
@@ -39,21 +40,24 @@ public class MainMenuScreen extends ScreenAdapter {
 			}
 		}
 	}
-
+	
 	public void draw () {
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+		GL20 gl = Gdx.gl;
+		gl.glClearColor(1, 0, 0, 1);
+		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
 		game.batcher.setProjectionMatrix(camera.combined);
+
+		game.batcher.disableBlending();
 		game.batcher.begin();
-		game.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		game.font.setScale( 2.0f,2.0f);
-		game.font.draw(game.batcher, "Play", 350, 300);
-		game.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		game.font.setScale( 2.0f,2.0f);
-		game.font.draw(game.batcher, "Help", 350, 225);
+		game.batcher.draw(AssetsManager.backgroundRegion, 0, 0, 320, 480);
 		game.batcher.end();
+
+		game.batcher.enableBlending();
+		game.batcher.begin();
+		game.batcher.draw(AssetsManager.logo, 160 - 274 / 2, 480 - 10 - 142, 274, 142);
+		game.batcher.draw(AssetsManager.mainMenu, 10, 200 - 110 / 2, 300, 110);
+		game.batcher.end();	
 	}
 
 	@Override
