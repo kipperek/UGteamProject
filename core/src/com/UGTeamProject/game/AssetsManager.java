@@ -16,6 +16,7 @@ import com.UGTeamProject.prefab.adapters.Physics;
 import com.UGTeamProject.prefab.adapters.Sound;
 import com.UGTeamProject.prefab.adapters.Texture;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Logger;
 
 public class AssetsManager {
@@ -30,18 +31,33 @@ public class AssetsManager {
 	public static Texture grassTexture;
 	public static Texture radioTexture;
 	public static Texture npcTexture;
+	
 	public static com.badlogic.gdx.graphics.Texture touchBackground;
 	public static com.badlogic.gdx.graphics.Texture touchKnob;
+	public static com.badlogic.gdx.graphics.Texture background;
+	public static com.badlogic.gdx.graphics.Texture items;
+	
+	public static TextureRegion mainMenu;
+	public static TextureRegion logo;
+	public static TextureRegion backgroundRegion;
+	
 	public static Music radioMusic;
 	
 	public static void load() {
 		
 		playerTexture = new Texture("sprites/bohater.png");
 		grassTexture = new Texture("sprites/grass.png");
-		radioTexture = new Texture("sprites/radio.jpg");
+		radioTexture = new Texture("sprites/radio.png");
 		npcTexture = new Texture("sprites/npc.png");
 		touchBackground = new Texture("sprites/touchBackground.png").getTexture();
 	    touchKnob = new Texture("sprites/touchKnob.png").getTexture();
+	    background = new com.badlogic.gdx.graphics.Texture("sprites/background.png");
+	    items = new com.badlogic.gdx.graphics.Texture ("sprites/items.png");
+	    
+		backgroundRegion = new TextureRegion(background, 0, 0, 320, 480);
+        mainMenu = new TextureRegion(items, 0, 224, 300, 110);
+        logo = new TextureRegion(items, 0, 352, 274, 142);
+	    
 		radioMusic = new Music("music/radio.mp3"); 
 		
 		try{
