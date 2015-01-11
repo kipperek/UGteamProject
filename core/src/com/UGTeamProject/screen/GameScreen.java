@@ -28,6 +28,7 @@ public class GameScreen extends ScreenAdapter {
     Viewport newport;
     ScreenInput updateActor;
     Touchpad leftAnalog;
+    Touchpad rightAnalog;
     Map map;
     
     public GameScreen (GameManager game) {
@@ -42,7 +43,9 @@ public class GameScreen extends ScreenAdapter {
     	if(Gdx.app.getType() == ApplicationType.Android)
     	{
     		leftAnalog = ScreenInput.initTouchpad(player.getX(),player.getY());
+    		rightAnalog = ScreenInput.initTouchpad(player.getX()+300,player.getY());
     		stage.addActor(leftAnalog);
+    		stage.addActor(rightAnalog);
     	}
     	map = new Map();
     	GameObjectManager.load();  
@@ -68,11 +71,11 @@ public class GameScreen extends ScreenAdapter {
 		game.font.setScale( 0.6f,0.6f);
 		game.font.draw(game.batcher, "X: " + player.getX() + "Y: " + player.getY(), player.getX() - 150, player.getY() + 200);      
 		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);	
-		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY());	// WTF?
+		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY(), player.getRotation());	// WTF?
 		AssetsManager.npcTexture.draw(game.batcher, npc.getX(), npc.getY());	
 		
 		if(Gdx.app.getType() == ApplicationType.Android)
-			updateActor.listen(leftAnalog);
+			updateActor.listen(leftAnalog,rightAnalog);
 		else if(Gdx.app.getType() == ApplicationType.Desktop)
 			updateActor.listen();
 		

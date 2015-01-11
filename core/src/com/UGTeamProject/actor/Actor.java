@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class Actor {
 
 	protected Rectangle actor;
+	protected float rotation = 0;
 	protected int life = 100;
 	
 	public Actor() {
@@ -42,6 +43,14 @@ public class Actor {
 	
 	public void setHeight(float height) {
 		actor.height = height;
+	}
+	
+	public float getRotation() {
+		return rotation;
+	}
+	
+	public void setRotation(float rotation) {
+		this.rotation = rotation;
 	}
 	
 	public void act(Actor player) {
