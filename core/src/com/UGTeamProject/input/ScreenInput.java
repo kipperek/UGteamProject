@@ -2,6 +2,7 @@ package com.UGTeamProject.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
@@ -13,6 +14,8 @@ import com.UGTeamProject.game.AssetsManager;
 public class ScreenInput {
 	
 	public static Actor player;
+	Vector2 vec = new Vector2();
+	Vector2 vec2 = new Vector2();
 
 	public ScreenInput(Actor newPlayer)
 	{
@@ -41,15 +44,22 @@ public class ScreenInput {
 		return touchpad;
 	}
 	
-	public void listen(Touchpad leftAnalog)
+	public void listen(Touchpad leftAnalog,Touchpad rightAnalog)
 	{
 		player.setX(player.getX() + leftAnalog.getKnobPercentX()*5);
 		leftAnalog.setX((player.getX() - 150) + leftAnalog.getKnobPercentX()*5);
         player.setY(player.getY() + leftAnalog.getKnobPercentY()*5);
         leftAnalog.setY((player.getY() - 50) + leftAnalog.getKnobPercentY()*5);
+        
+        vec.set(rightAnalog.getKnobPercentX(), rightAnalog.getKnobPercentY());
+        player.setRotation(vec.angle()+270);
+        
+        rightAnalog.setX((player.getX() + 150) + rightAnalog.getKnobPercentX()*5);
+        rightAnalog.setY((player.getY() - 50) + rightAnalog.getKnobPercentY()*5);
 	}
 	public void listen()
 	{
+		
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) 
 	        player.setX(player.getX() - 200 * Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
@@ -58,6 +68,7 @@ public class ScreenInput {
 	        player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Keys.DOWN)) 
 	        player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
+	    
 	}
 }
 
