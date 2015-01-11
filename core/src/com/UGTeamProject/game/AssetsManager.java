@@ -46,6 +46,8 @@ public class AssetsManager {
 	public static void load() {
 		
 		playerTexture = new Texture("sprites/bohater.png");
+		playerTexture.setOrigin(32f,14f);
+		
 		grassTexture = new Texture("sprites/grass.png");
 		radioTexture = new Texture("sprites/radio.png");
 		npcTexture = new Texture("sprites/npc.png");

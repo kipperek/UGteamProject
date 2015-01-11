@@ -42,8 +42,14 @@ public class Texture implements Drawable{
 		return new Vector2(texture.getX(),texture.getY());
 	}
 	
+	public void setOrigin(float originX, float originY){
+		texture.setOrigin(originX, originY);		
+	}
+	
 	public com.badlogic.gdx.graphics.Texture getTexture(){
 		return this.texture.getTexture();
 	}
+	
+	
 
 }

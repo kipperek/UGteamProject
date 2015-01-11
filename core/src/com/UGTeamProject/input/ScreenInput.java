@@ -68,7 +68,11 @@ public class ScreenInput {
 	        player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
 		if(Gdx.input.isKeyPressed(Keys.DOWN)) 
 	        player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
-	    
+		
+		float mouseX = Gdx.input.getX();
+		float mouseY = Gdx.input.getY();
+		player.setRotation((float)Math.toDegrees(Math.atan2(-mouseY + 220, mouseX - 320)) - 90);
+		               
 	}
 }
 

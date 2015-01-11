@@ -57,7 +57,7 @@ public class GameScreen extends ScreenAdapter {
 		Gdx.gl.glClearColor(0.09f, 0.28f, 0.2f, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 			
-		camera.position.set(player.getX() + player.getWidth()/2, player.getY() + 75, 0);
+		camera.position.set(player.getX() + player.getWidth()/2, player.getY() + player.getHeight()/2 - 14 , 0);
 	    camera.update();
 	    game.batcher.setProjectionMatrix(camera.combined);
 	    
