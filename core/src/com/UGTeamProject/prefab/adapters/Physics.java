@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Filter;
+//import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
@@ -37,7 +37,7 @@ public class Physics {
 	private Shape shape;
 	private Body body;
 	
-	private Filter physicsGroupFilter;
+	//private Filter physicsGroupFilter;
 	
 	private void Initialize(World physics, PHYSICS_TYPE type, MOBILITY_TYPE mobility, Shape shape, Float angle, float density, float friction, float restitution, Vector2 position){
 		

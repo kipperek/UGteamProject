@@ -1,6 +1,5 @@
 package com.UGTeamProject.screen;
 
-import com.UGTeamProject.actor.Actor;
 import com.UGTeamProject.actor.Character;
 import com.UGTeamProject.actor.NPC;
 import com.UGTeamProject.game.AssetsManager;
@@ -22,8 +21,8 @@ public class GameScreen extends ScreenAdapter {
 
     OrthographicCamera camera;
     GameManager game;
-    Actor player;
-    Actor npc;
+    Character player;
+    NPC npc;
     Stage stage;
     Viewport newport;
     ScreenInput updateActor;
@@ -35,8 +34,8 @@ public class GameScreen extends ScreenAdapter {
     	this.game = game;	
     	camera = new OrthographicCamera(800, 600);
     	camera.setToOrtho(false, 400, 300);
-    	player = new Character();
-    	npc = new NPC();
+    	player = new Character(AssetsManager.playerTexture);
+    	npc = new NPC(AssetsManager.npcTexture);
     	updateActor = new ScreenInput(player);
     	newport = new FitViewport(400, 300, camera);
     	stage = new Stage(newport,game.batcher);
@@ -56,8 +55,11 @@ public class GameScreen extends ScreenAdapter {
 	public void render (float delta) {
 		Gdx.gl.glClearColor(0.09f, 0.28f, 0.2f, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-			
-		camera.position.set(player.getX() + player.getWidth()/2, player.getY() + player.getHeight()/2 - 14 , 0);
+		
+		npc.computeRotation((int)player.getX(), (int)player.getY());
+		npc.act(player);
+		
+		camera.position.set((int)player.getX() + (int)player.getWidth()/2, (int)player.getY() + (int)player.getHeight()/2 - 14 , 0);
 	    camera.update();
 	    game.batcher.setProjectionMatrix(camera.combined);
 	    
@@ -71,8 +73,12 @@ public class GameScreen extends ScreenAdapter {
 		game.font.setScale( 0.6f,0.6f);
 		game.font.draw(game.batcher, "X: " + player.getX() + "Y: " + player.getY(), player.getX() - 150, player.getY() + 200);      
 		AssetsManager.radioTexture.draw(game.batcher, GameObjectManager.radio.position.x, GameObjectManager.radio.position.y);	
-		AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY(), player.getRotation());	// WTF?
-		AssetsManager.npcTexture.draw(game.batcher, npc.getX(), npc.getY());	
+		
+		//AssetsManager.playerTexture.draw(game.batcher, player.getX(), player.getY(), player.getRotation());	// WTF?
+		//AssetsManager.npcTexture.draw(game.batcher, npc.getX(), npc.getY());	
+
+		npc.draw(game.batcher);
+		player.draw(game.batcher);		
 		
 		if(Gdx.app.getType() == ApplicationType.Android)
 			updateActor.listen(leftAnalog,rightAnalog);
@@ -83,7 +89,7 @@ public class GameScreen extends ScreenAdapter {
 		
 		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY()); 
 		stage.act(Gdx.graphics.getDeltaTime());    
-		npc.act(player);
+		
         stage.draw();
 	}
 }

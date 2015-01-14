@@ -3,7 +3,6 @@ package com.UGTeamProject.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
@@ -71,7 +70,8 @@ public class ScreenInput {
 		
 		float mouseX = Gdx.input.getX();
 		float mouseY = Gdx.input.getY();
-		player.setRotation((float)Math.toDegrees(Math.atan2(-mouseY + 220, mouseX - 320)) - 90);
+		player.setRotation((float)Math.toDegrees(Math.atan2(-mouseY + Gdx.graphics.getHeight()/2, mouseX - Gdx.graphics.getWidth()/2)) - 90);
+		
 		               
 	}
 }

@@ -1,16 +1,19 @@
 package com.UGTeamProject.actor;
 
-import com.badlogic.gdx.Gdx;
+import com.UGTeamProject.prefab.adapters.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Actor {
 
 	protected Rectangle actor;
-	protected float rotation = 0;
+	protected Texture texture;
+	protected float rotation = 1;
 	protected int life = 100;
 	
-	public Actor() {
+	public Actor(Texture texture) {
 		actor = new Rectangle();
+		this.texture = texture;
 	}
 	
 	public float getX() {
@@ -53,15 +56,8 @@ public class Actor {
 		this.rotation = rotation;
 	}
 	
-	public void act(Actor player) {
-		 if(player.getY() > actor.y)
-			 actor.y += 100 * Gdx.graphics.getDeltaTime();
-        else
-       	 actor.y -= 100 * Gdx.graphics.getDeltaTime();
-        
-        if(player.getX() > actor.x)
-       	 actor.x += 100 * Gdx.graphics.getDeltaTime();
-        else
-       	 actor.x -= 100 * Gdx.graphics.getDeltaTime();
+	public void draw(Batch batch){
+		if(life > 0)
+			texture.draw(batch, actor.x, actor.y, rotation);
 	}
 }

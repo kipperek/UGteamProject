@@ -51,6 +51,7 @@ public class AssetsManager {
 		grassTexture = new Texture("sprites/grass.png");
 		radioTexture = new Texture("sprites/radio.png");
 		npcTexture = new Texture("sprites/npc.png");
+		npcTexture.setOrigin(32f,14f);
 		touchBackground = new Texture("sprites/touchBackground.png").getTexture();
 	    touchKnob = new Texture("sprites/touchKnob.png").getTexture();
 	    background = new com.badlogic.gdx.graphics.Texture("sprites/background.png");
