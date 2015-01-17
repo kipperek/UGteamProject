@@ -6,20 +6,20 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameManager extends Game {
-	
-	public SpriteBatch batcher; //used by all screens
+
+	public SpriteBatch batcher; // used by all screens
 	public BitmapFont font;
-  
-	@Override
-    public void create() {
-        batcher = new SpriteBatch();
-        font = new BitmapFont();
-        AssetsManager.load();
-        setScreen(new MainMenuScreen(this));
-    }
 
 	@Override
-    public void render() {
-        super.render(); 
-    }
-}	
+	public void create() {
+		batcher = new SpriteBatch();
+		font = new BitmapFont();
+		AssetsManager.load();
+		setScreen(new MainMenuScreen(this));
+	}
+
+	@Override
+	public void render() {
+		super.render();
+	}
+}

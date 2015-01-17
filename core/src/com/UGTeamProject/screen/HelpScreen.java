@@ -15,15 +15,15 @@ public class HelpScreen extends ScreenAdapter {
 	Rectangle mainmenuBounds;
 	Vector3 touchPoint;
 
-    public HelpScreen(GameManager game) {
-        this.game = game;
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
-        mainmenuBounds = new Rectangle(325, 375, 175, 50);
+	public HelpScreen(GameManager game) {
+		this.game = game;
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, 800, 480);
+		mainmenuBounds = new Rectangle(325, 375, 175, 50);
 		touchPoint = new Vector3();
 	}
 
-	public void update () {
+	public void update() {
 		if (Gdx.input.isTouched()) {
 			camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 			if (mainmenuBounds.contains(touchPoint.x, touchPoint.y)) {
@@ -33,23 +33,23 @@ public class HelpScreen extends ScreenAdapter {
 		}
 	}
 
-	public void draw () {
+	public void draw() {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
 		camera.update();
 		game.batcher.setProjectionMatrix(camera.combined);
 		game.batcher.begin();
 		game.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		game.font.setScale( 2.0f,2.0f);
+		game.font.setScale(2.0f, 2.0f);
 		game.font.draw(game.batcher, "Main menu", 350, 400);
 		game.batcher.end();
 	}
 
 	@Override
-	public void render (float delta) {
+	public void render(float delta) {
 		update();
 		draw();
 	}
-	
+
 }

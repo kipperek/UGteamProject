@@ -17,9 +17,7 @@ public class GameObject {
 	public ArrayList<Music> music = new ArrayList<Music>();
 	public Vector2 position;
 
-	public GameObject(ArrayList<Sound> sounds, ArrayList<Texture> textures,
-			ArrayList<Physics> physics, ArrayList<Music> musics, float x,
-			float y) {
+	public GameObject(ArrayList<Sound> sounds, ArrayList<Texture> textures, ArrayList<Physics> physics, ArrayList<Music> musics, float x, float y) {
 
 		sound = sounds;
 		physic = physics;

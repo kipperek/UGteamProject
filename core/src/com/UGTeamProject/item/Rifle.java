@@ -2,7 +2,7 @@ package com.UGTeamProject.item;
 
 import com.UGTeamProject.prefab.adapters.Texture;
 
-public class Rifle extends Weapon{
+public class Rifle extends Weapon {
 
 	public Rifle(Texture texture) {
 		super(texture);

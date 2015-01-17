@@ -24,8 +24,7 @@ public class NPC extends Actor {
 	}
 
 	public void computeRotation(int playerX, int playerY) {
-		rotation = (float) Math.toDegrees(Math.atan2(+playerY - actor.y,
-				playerX - actor.x)) - 90;
+		rotation = (float) Math.toDegrees(Math.atan2(+playerY - actor.y, playerX - actor.x)) - 90;
 	}
 
 	public void act(Actor player) {

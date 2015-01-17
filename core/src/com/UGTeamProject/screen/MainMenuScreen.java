@@ -17,23 +17,19 @@ public class MainMenuScreen extends ScreenAdapter {
 	Rectangle helpBounds;
 	Vector3 touchPoint;
 
-    public MainMenuScreen(GameManager game) {
-        this.game = game;
-       // camera = new OrthographicCamera();
-        //camera.setToOrtho(false, 800, 480);
-       // playBounds = new Rectangle(325, 275, 100, 50);
-		//helpBounds = new Rectangle(325, 200, 100, 50);
-        camera = new OrthographicCamera(320, 480);
+	public MainMenuScreen(GameManager game) {
+		this.game = game;
+		camera = new OrthographicCamera(320, 480);
 		camera.position.set(320 / 2, 480 / 2, 0);
 		playBounds = new Rectangle(160 - 150, 200 + 18, 300, 36);
 		helpBounds = new Rectangle(160 - 150, 200 - 18 - 36, 300, 36);
 		touchPoint = new Vector3();
 	}
 
-	public void update () {
+	public void update() {
 		if (Gdx.input.isTouched()) {
 			camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-			
+
 			if (playBounds.contains(touchPoint.x, touchPoint.y)) {
 				game.setScreen(new GameScreen(game));
 				return;
@@ -45,23 +41,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		}
 	}
 
-	/*public void draw () {
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		camera.update();
-		game.batcher.setProjectionMatrix(camera.combined);
-		game.batcher.begin();
-		game.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		game.font.setScale( 2.0f,2.0f);
-		game.font.draw(game.batcher, "Play", 350, 300);
-		game.font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		game.font.setScale( 2.0f,2.0f);
-		game.font.draw(game.batcher, "Help", 350, 225);
-		game.batcher.end();
-	}*/
-	
-	public void draw () {
+	public void draw() {
 		GL20 gl = Gdx.gl;
 		gl.glClearColor(1, 0, 0, 1);
 		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -77,12 +57,11 @@ public class MainMenuScreen extends ScreenAdapter {
 		game.batcher.begin();
 		game.batcher.draw(AssetsManager.logo, 160 - 274 / 2, 480 - 10 - 142, 274, 142);
 		game.batcher.draw(AssetsManager.mainMenu, 10, 200 - 110 / 2, 300, 110);
-		//game.batcher.draw(Settings.soundEnabled ? Assets.soundOn : Assets.soundOff, 0, 0, 64, 64);
-		game.batcher.end();	
+		game.batcher.end();
 	}
 
 	@Override
-	public void render (float delta) {
+	public void render(float delta) {
 		update();
 		draw();
 	}

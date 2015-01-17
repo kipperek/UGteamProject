@@ -3,7 +3,7 @@ package com.UGTeamProject.item;
 import com.UGTeamProject.prefab.adapters.Texture;
 
 public class Weapon extends Item {
-	
+
 	protected int ammoSize;
 	protected int magazineSize;
 	protected int fireRate;

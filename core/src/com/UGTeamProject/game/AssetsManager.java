@@ -56,11 +56,9 @@ public class AssetsManager {
 		radioTexture = new Texture("sprites/radio.png");
 		npcTexture = new Texture("sprites/npc.png");
 		npcTexture.setOrigin(32f, 14f);
-		touchBackground = new Texture("sprites/touchBackground.png")
-				.getTexture();
+		touchBackground = new Texture("sprites/touchBackground.png").getTexture();
 		touchKnob = new Texture("sprites/touchKnob.png").getTexture();
-		background = new com.badlogic.gdx.graphics.Texture(
-				"sprites/background.png");
+		background = new com.badlogic.gdx.graphics.Texture("sprites/background.png");
 		items = new com.badlogic.gdx.graphics.Texture("sprites/items.png");
 
 		backgroundRegion = new TextureRegion(background, 0, 0, 320, 480);
@@ -83,29 +81,23 @@ public class AssetsManager {
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element item = (Element) node;
 					String name = item.getAttribute("name");
-					Element type = (Element) item.getElementsByTagName("type")
-							.item(0);
+					Element type = (Element) item.getElementsByTagName("type").item(0);
 
 					switch (type.getNodeValue()) {
 					case "Texture":
-						textures.put(name, new Texture("sprites/"
-								+ item.getElementsByTagName("file").item(0)
-										.getNodeValue()));
+						textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue()));
 						break;
 					case "Sound":
 						break;
 					case "Music":
-						music.put(name, new Music("music/"
-								+ item.getElementsByTagName("file").item(0)
-										.getNodeValue()));
+						music.put(name, new Music("music/" + item.getElementsByTagName("file").item(0).getNodeValue()));
 						break;
 					case "Physics":
 						break;
 					case "Animation":
 						break;
 					default:
-						new Logger("bad type name in objects.xml: "
-								+ type.getNodeValue(), Logger.ERROR);
+						new Logger("bad type name in objects.xml: " + type.getNodeValue(), Logger.ERROR);
 						break;
 					}
 				}

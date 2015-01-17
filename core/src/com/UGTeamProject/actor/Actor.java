@@ -1,8 +1,5 @@
 package com.UGTeamProject.actor;
 
-import com.UGTeamProject.game.ItemManager;
-import com.UGTeamProject.item.Item;
-import com.UGTeamProject.item.Weapon;
 import com.UGTeamProject.prefab.adapters.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
