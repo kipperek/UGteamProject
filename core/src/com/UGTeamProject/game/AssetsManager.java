@@ -27,7 +27,12 @@ public class AssetsManager {
 	public static TreeMap<String, Physics> physics = new TreeMap<String, Physics>();
 	public static TreeMap<String, Animation> animations = new TreeMap<String, Animation>();
 
-	public static Texture playerTexture;
+	public static Texture playerKnifeTexture;
+	public static Texture playerKnife2Texture;
+	public static Texture playerPistolTexture;
+	public static Texture playerPistol2Texture;
+	public static Texture playerRifleTexture;
+	public static Texture playerRifle2Texture;
 	public static Texture grassTexture;
 	public static Texture radioTexture;
 	public static Texture npcTexture;
@@ -47,8 +52,19 @@ public class AssetsManager {
 
 	public static void load() {
 
-		playerTexture = new Texture("sprites/bohater.png");
-		playerTexture.setOrigin(32f, 14f);
+		playerKnifeTexture = new Texture("sprites/playerKnife.png");
+		playerKnifeTexture.setOrigin(32f, 14f);
+		playerKnife2Texture = new Texture("sprites/playerKnife2.png");
+		playerKnife2Texture.setOrigin(32f, 14f);
+		playerPistolTexture = new Texture("sprites/playerPistol.png");
+		playerPistolTexture.setOrigin(32f, 14f);
+		playerPistol2Texture = new Texture("sprites/playerPistol2.png");
+		playerPistol2Texture.setOrigin(32f, 14f);
+		playerRifleTexture = new Texture("sprites/playerRifle.png");
+		playerRifleTexture.setOrigin(32f, 14f);
+		playerRifle2Texture = new Texture("sprites/playerRifle2.png");
+		playerRifle2Texture.setOrigin(32f, 14f);
+			
 		pistolTexture = new Texture("sprites/pistol.png");
 		rifleTexture = new Texture("sprites/rifle.png");
 

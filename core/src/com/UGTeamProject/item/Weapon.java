@@ -4,11 +4,12 @@ import com.UGTeamProject.prefab.adapters.Texture;
 
 public class Weapon extends Item {
 
-	protected int ammoSize;
-	protected int magazineSize;
-	protected int fireRate;
-	protected int damage;
-	protected int bulletSpeed;
+	public int ammoSize;
+	public int magazineSize;
+	public int fireRate;
+	public int damage;
+	public int bulletSpeed;
+	public Texture playerTexture;
 
 	public Weapon(Texture texture) {
 		super(texture);

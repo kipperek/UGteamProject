@@ -37,7 +37,7 @@ public class GameScreen extends ScreenAdapter {
 		this.game = game;
 		camera = new OrthographicCamera(800, 600);
 		camera.setToOrtho(false, 400, 300);
-		player = new Character(AssetsManager.playerTexture);
+		player = new Character(AssetsManager.playerKnifeTexture);
 		npc = new NPC(AssetsManager.npcTexture);
 		updateActor = new ScreenInput(player);
 		newport = new FitViewport(400, 300, camera);
