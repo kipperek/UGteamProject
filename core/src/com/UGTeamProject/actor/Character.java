@@ -12,6 +12,7 @@ public class Character extends Actor {
 
 	protected ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	protected Weapon currentWeapon;
+	protected int currentWeaponIndex;
 
 	public Character(Texture texture) {
 		super(texture);
@@ -20,6 +21,7 @@ public class Character extends Actor {
 		actor.height = 64;
 		weapons.add(ItemManager.knife);
 		currentWeapon = weapons.get(0);
+		currentWeaponIndex = 0;
 	}
 
 	public void spawn() {
@@ -40,5 +42,14 @@ public class Character extends Actor {
 					weapons.add((Weapon) item);
 			}
 		}
+	}
+
+	public void changeWeapon() {
+		currentWeaponIndex++;
+		if (currentWeaponIndex == weapons.size()) {
+			currentWeapon = weapons.get(0);
+			currentWeaponIndex = 0;
+		} else
+			currentWeapon = weapons.get(currentWeaponIndex);
 	}
 }

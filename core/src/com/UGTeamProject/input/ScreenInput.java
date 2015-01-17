@@ -64,8 +64,10 @@ public class ScreenInput {
 			player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
 		if (Gdx.input.isKeyPressed(Keys.S))
 			player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
-		if (Gdx.input.isKeyPressed(Keys.F))
+		if (Gdx.input.isKeyJustPressed(Keys.F))
 			player.pickUp();
+		if (Gdx.input.isKeyJustPressed(Keys.Q))
+			player.changeWeapon();
 
 		float mouseX = Gdx.input.getX();
 		float mouseY = Gdx.input.getY();
