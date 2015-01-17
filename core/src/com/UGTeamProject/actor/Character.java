@@ -3,6 +3,7 @@ package com.UGTeamProject.actor;
 import java.util.ArrayList;
 
 import com.UGTeamProject.game.ItemManager;
+import com.UGTeamProject.item.Item;
 import com.UGTeamProject.item.Weapon;
 import com.UGTeamProject.prefab.adapters.Texture;
 import com.badlogic.gdx.math.MathUtils;
@@ -29,5 +30,15 @@ public class Character extends Actor {
 	public void die() {
 		if (life <= 0)
 			spawn();
+	}
+
+	public void pickUp() {
+		for (Item item : ItemManager.items) {
+			if (com.badlogic.gdx.math.Intersector.overlaps(actor, item.item)) {
+				item.setPickedUp(true);
+				if (item instanceof Weapon)
+					weapons.add((Weapon) item);
+			}
+		}
 	}
 }

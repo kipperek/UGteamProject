@@ -44,8 +44,7 @@ public class GameScreen extends ScreenAdapter {
 		stage = new Stage(newport, game.batcher);
 		if (Gdx.app.getType() == ApplicationType.Android) {
 			leftAnalog = ScreenInput.initTouchpad(player.getX(), player.getY());
-			rightAnalog = ScreenInput.initTouchpad(player.getX() + 300,
-					player.getY());
+			rightAnalog = ScreenInput.initTouchpad(player.getX() + 300, player.getY());
 			stage.addActor(leftAnalog);
 			stage.addActor(rightAnalog);
 		}
@@ -63,8 +62,7 @@ public class GameScreen extends ScreenAdapter {
 		npc.computeRotation((int) player.getX(), (int) player.getY());
 		npc.act(player);
 
-		camera.position.set((int) player.getX() + (int) player.getWidth() / 2,
-				(int) player.getY() + (int) player.getHeight() / 2 - 14, 0);
+		camera.position.set((int) player.getX() + (int) player.getWidth() / 2, (int) player.getY() + (int) player.getHeight() / 2 - 14, 0);
 		camera.update();
 		game.batcher.setProjectionMatrix(camera.combined);
 
@@ -76,16 +74,15 @@ public class GameScreen extends ScreenAdapter {
 		game.batcher.enableBlending();
 		game.batcher.begin();
 		game.font.setScale(0.6f, 0.6f);
-		game.font.draw(game.batcher,
-				"X: " + player.getX() + "Y: " + player.getY(),
-				player.getX() - 150, player.getY() + 200);
+		game.font.draw(game.batcher, "X: " + player.getX() + "Y: " + player.getY(), player.getX() - 150, player.getY() + 200);
 
 		for (GameObject gameObject : GameObjectManager.gameObjects) {
 			gameObject.draw(game.batcher);
 		}
 
 		for (Item item : ItemManager.items) {
-			item.draw(game.batcher);
+			if (!item.isPickedUp())
+				item.draw(game.batcher);
 		}
 
 		npc.draw(game.batcher);
@@ -98,8 +95,7 @@ public class GameScreen extends ScreenAdapter {
 
 		game.batcher.end();
 
-		GameObjectManager.radio.music.get(0).play(
-				GameObjectManager.radio.position, player.getX(), player.getY());
+		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY());
 		stage.act(Gdx.graphics.getDeltaTime());
 
 		stage.draw();
