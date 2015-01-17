@@ -59,14 +59,16 @@ public class ScreenInput {
 	public void listen()
 	{
 		
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) 
+		if(Gdx.input.isKeyPressed(Keys.A)) 
 	        player.setX(player.getX() - 200 * Gdx.graphics.getDeltaTime());
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) 
+		if(Gdx.input.isKeyPressed(Keys.D)) 
 	        player.setX(player.getX() + 200 * Gdx.graphics.getDeltaTime());
-		if(Gdx.input.isKeyPressed(Keys.UP)) 
+		if(Gdx.input.isKeyPressed(Keys.W)) 
 	        player.setY(player.getY() + 200 * Gdx.graphics.getDeltaTime());
-		if(Gdx.input.isKeyPressed(Keys.DOWN)) 
+		if(Gdx.input.isKeyPressed(Keys.S)) 
 	        player.setY(player.getY() - 200 * Gdx.graphics.getDeltaTime());
+		if(Gdx.input.isKeyPressed(Keys.F)) 
+			player.pickUp();
 		
 		float mouseX = Gdx.input.getX();
 		float mouseY = Gdx.input.getY();

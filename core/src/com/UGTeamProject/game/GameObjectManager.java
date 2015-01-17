@@ -9,14 +9,17 @@ import com.UGTeamProject.prefab.adapters.Texture;
 public class GameObjectManager {
 
 	public static GameObject radio;
-	
-	
+	public static ArrayList<GameObject> gameObjects;
+
 	public static void load() {
-		
-	    ArrayList<Texture> texture = new ArrayList<Texture>(); 
-        ArrayList<Music> music = new ArrayList<Music>(); 
-        music.add(AssetsManager.radioMusic); 
-        texture.add(AssetsManager.textures.get("radioTexture")); 
-	    radio = new GameObject(null, texture, null, music, 333, 333);
+
+		ArrayList<Texture> texture = new ArrayList<Texture>();
+		ArrayList<Music> music = new ArrayList<Music>();
+		music.add(AssetsManager.radioMusic);
+		texture.add(AssetsManager.radioTexture);
+		radio = new GameObject(null, texture, null, music, 333, 333);
+
+		gameObjects = new ArrayList<GameObject>();
+		gameObjects.add(radio);
 	}
 }
