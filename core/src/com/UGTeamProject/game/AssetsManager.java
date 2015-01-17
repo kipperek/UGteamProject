@@ -49,6 +49,7 @@ public class AssetsManager {
 	public static TextureRegion backgroundRegion;
 
 	public static Music radioMusic;
+	public static Music zombie;
 
 	public static void load() {
 
@@ -82,6 +83,7 @@ public class AssetsManager {
 		logo = new TextureRegion(items, 0, 352, 274, 142);
 
 		radioMusic = new Music("music/radio.mp3");
+		zombie = new Music("music/zombie.wav");
 
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

@@ -81,8 +81,7 @@ public class GameScreen extends ScreenAdapter {
 		}
 
 		for (Item item : ItemManager.items) {
-			if (!item.isPickedUp())
-				item.draw(game.batcher);
+			item.draw(game.batcher);
 		}
 
 		npc.draw(game.batcher);
@@ -96,6 +95,7 @@ public class GameScreen extends ScreenAdapter {
 		game.batcher.end();
 
 		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY());
+		AssetsManager.zombie.play(npc.getX(), npc.getY(), player.getX(), player.getY());
 		stage.act(Gdx.graphics.getDeltaTime());
 
 		stage.draw();

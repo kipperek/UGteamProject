@@ -52,6 +52,31 @@ public class Music {
 		} else
 			music.setVolume(0f);
 	}
+	
+	public void play(float musicPositionX, float musicPositionY, float charPositionX, float charPositionY) {
+
+		// volume range 0 - 1
+		float distance = 0;
+
+		// counting max distance
+		if ((musicPositionX - charPositionX) > distance)
+			distance = musicPositionX - charPositionX;
+		else if ((charPositionX - musicPositionX) > distance)
+			distance = charPositionX - musicPositionX;
+
+		if ((musicPositionY - charPositionY) > distance)
+			distance = musicPositionY - charPositionY;
+		else if ((charPositionY - musicPositionY) > distance)
+			distance = charPositionY - musicPositionY;
+
+		music.play();
+
+		// handling distance
+		if (distance < hearDistance) {
+			music.setVolume(1f * (100 / distance));
+		} else
+			music.setVolume(0f);
+	}
 
 	public void setLooping() {
 		music.setLooping(true);

@@ -15,9 +15,17 @@ public class Sound {
 		position.x = soundPosition.x;
 		position.y = soundPosition.y;
 	}
+	
+	public Sound(String resourceName, float soundPositionX, float soundPositionY) {
+		sound = Gdx.audio.newSound(Gdx.files.internal(resourceName));
+		position = new Vector2();
+		position.x = soundPositionX;
+		position.y = soundPositionY;
+	}
 
 	public Sound(String resourceName) {
 		sound = Gdx.audio.newSound(Gdx.files.internal(resourceName));
+		position = new Vector2();
 	}
 
 	public void play() {
@@ -39,6 +47,27 @@ public class Sound {
 			distance = soundPosition.y - charPositionY;
 		else if ((charPositionY - soundPosition.y) > distance)
 			distance = charPositionY - soundPosition.y;
+
+		// handling distance
+		if (distance < hearDistance)
+			sound.play(1f * (50 / distance));
+	}
+	
+	public void play(float soundPositionX, float soundPositionY, float charPositionX, float charPositionY) {
+
+		// volume range 0 - 1
+		float distance = 0;
+
+		// counting max distance
+		if ((soundPositionX - charPositionX) > distance)
+			distance = soundPositionX - charPositionX;
+		else if ((charPositionX - soundPositionX) > distance)
+			distance = charPositionX - soundPositionX;
+
+		if ((soundPositionY - charPositionY) > distance)
+			distance = soundPositionY - charPositionY;
+		else if ((charPositionY - soundPositionY) > distance)
+			distance = charPositionY - soundPositionY;
 
 		// handling distance
 		if (distance < hearDistance)

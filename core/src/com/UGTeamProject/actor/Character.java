@@ -13,7 +13,7 @@ public class Character extends Actor {
 	protected Weapon weapons[] = new Weapon[3];
 	protected Weapon currentWeapon;
 	protected int currentWeaponIndex;
-	protected int pistolAmmo; 
+	protected int pistolAmmo;
 	protected int rifleAmmo;
 	protected boolean wut;
 
@@ -42,22 +42,22 @@ public class Character extends Actor {
 	public void pickUp() {
 		for (Item item : ItemManager.items) {
 			if (com.badlogic.gdx.math.Intersector.overlaps(actor, item.item)) {
-				item.setPickedUp(true);
+				item.spawn();
 				if (item instanceof Pistol && weapons[1] == null)
 					weapons[1] = ItemManager.pistol;
 				else if (item instanceof Rifle && weapons[2] == null)
 					weapons[2] = ItemManager.rifle;
+				
 				if (item instanceof Pistol) {
 					pistolAmmo += ItemManager.pistol.magazineSize;
-					if(pistolAmmo > ItemManager.pistol.ammoSize)
+					if (pistolAmmo > ItemManager.pistol.ammoSize)
 						pistolAmmo = ItemManager.pistol.ammoSize;
-				}
-				else if (item instanceof Rifle) {
+				} else if (item instanceof Rifle) {
 					rifleAmmo += ItemManager.rifle.magazineSize;
-					if(rifleAmmo > ItemManager.rifle.ammoSize)
+					if (rifleAmmo > ItemManager.rifle.ammoSize)
 						rifleAmmo = ItemManager.rifle.ammoSize;
 				}
-			} 
+			}
 		}
 	}
 

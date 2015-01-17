@@ -43,8 +43,8 @@ public class Item {
 	}
 
 	public void spawn() {
-		item.x = MathUtils.random(0, 500);
-		item.y = MathUtils.random(0, 500);
+		item.x = MathUtils.random(0, 1000);
+		item.y = MathUtils.random(0, 1000);
 	}
 
 	public void draw(Batch batch) {
