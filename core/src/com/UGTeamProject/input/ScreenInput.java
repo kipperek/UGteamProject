@@ -36,7 +36,7 @@ public class ScreenInput {
 		touchpadStyle.background = touchBackground;
 		touchpadStyle.knob = touchKnob;
 		touchpad = new Touchpad(1, touchpadStyle);
-		touchpad.setBounds(x - 150, y - 50, 50, 50);
+		touchpad.setBounds(x - 150, y - 50, 83, 83);
 
 		return touchpad;
 	}
@@ -45,13 +45,13 @@ public class ScreenInput {
 		player.setX(player.getX() + leftAnalog.getKnobPercentX() * 5);
 		leftAnalog.setX((player.getX() - 150) + leftAnalog.getKnobPercentX() * 5);
 		player.setY(player.getY() + leftAnalog.getKnobPercentY() * 5);
-		leftAnalog.setY((player.getY() - 50) + leftAnalog.getKnobPercentY() * 5);
+		leftAnalog.setY((player.getY() - 90) + leftAnalog.getKnobPercentY() * 5);
 
 		vec.set(rightAnalog.getKnobPercentX(), rightAnalog.getKnobPercentY());
 		player.setRotation(vec.angle() + 270);
 
 		rightAnalog.setX((player.getX() + 150) + rightAnalog.getKnobPercentX() * 5);
-		rightAnalog.setY((player.getY() - 50) + rightAnalog.getKnobPercentY() * 5);
+		rightAnalog.setY((player.getY() - 90) + rightAnalog.getKnobPercentY() * 5);
 	}
 
 	public void listen() {
