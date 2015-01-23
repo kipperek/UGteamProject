@@ -1,7 +1,9 @@
 package com.UGTeamProject.screen;
 
+
 import com.UGTeamProject.actor.Character;
 import com.UGTeamProject.actor.NPC;
+import com.UGTeamProject.game.ActorManager;
 import com.UGTeamProject.game.AssetsManager;
 import com.UGTeamProject.game.GameManager;
 import com.UGTeamProject.game.GameObjectManager;
@@ -15,8 +17,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
@@ -28,7 +28,6 @@ public class GameScreen extends ScreenAdapter {
 	OrthographicCamera camera;
 	GameManager game;
 	Character player;
-	NPC npc;
 	Stage stage;
 	Viewport newport;
 	ScreenInput updateActor;
@@ -43,7 +42,6 @@ public class GameScreen extends ScreenAdapter {
 		camera = new OrthographicCamera(800, 600);
 		camera.setToOrtho(false, 400, 300);
 		player = new Character(AssetsManager.playerKnifeTexture);
-		npc = new NPC(AssetsManager.npcTexture);
 		updateActor = new ScreenInput(player);
 		newport = new FitViewport(400, 300, camera);
 		stage = new Stage(newport, game.batcher);
@@ -63,6 +61,7 @@ public class GameScreen extends ScreenAdapter {
 		map = new Map();
 		GameObjectManager.load();
 		ItemManager.load();
+		ActorManager.load();
 		Gdx.input.setInputProcessor(stage);
 	}
 
@@ -71,8 +70,11 @@ public class GameScreen extends ScreenAdapter {
 		Gdx.gl.glClearColor(0.09f, 0.28f, 0.2f, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-		npc.computeRotation((int) player.getX(), (int) player.getY());
-		npc.act(player);
+		for (NPC npc : ActorManager.npcs) {
+			npc.computeRotation((int) player.getX(), (int) player.getY());
+			npc.act(player);
+			AssetsManager.zombie.play(npc.getX(), npc.getY(), player.getX(), player.getY(), 300);
+		}
 
 		camera.position.set((int) player.getX() + (int) player.getWidth() / 2, (int) player.getY() + (int) player.getHeight() / 2 - 14, 0);
 		camera.update();
@@ -96,7 +98,9 @@ public class GameScreen extends ScreenAdapter {
 			item.draw(game.batcher);
 		}
 
-		npc.draw(game.batcher);
+		for (NPC npc : ActorManager.npcs) {
+			npc.draw(game.batcher);
+		}
 		player.draw(game.batcher);
 
 		if (Gdx.app.getType() == ApplicationType.Android)
@@ -106,8 +110,7 @@ public class GameScreen extends ScreenAdapter {
 
 		game.batcher.end();
 
-		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY());
-		AssetsManager.zombie.play(npc.getX(), npc.getY(), player.getX(), player.getY());
+		GameObjectManager.radio.music.get(0).play(GameObjectManager.radio.position, player.getX(), player.getY(), 500);
 		stage.act(Gdx.graphics.getDeltaTime());
 
 		stage.draw();
