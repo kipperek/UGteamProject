@@ -7,7 +7,6 @@ public class Music {
 
 	private com.badlogic.gdx.audio.Music music;
 	private Vector2 position;
-	private int hearDistance = 500;
 
 	public Music(String resourceName, Vector2 musicPosition) {
 		music = Gdx.audio.newMusic(Gdx.files.internal(resourceName));
@@ -28,7 +27,7 @@ public class Music {
 		music.setVolume(volume);
 	}
 
-	public void play(Vector2 musicPosition, float charPositionX, float charPositionY) {
+	public void play(Vector2 musicPosition, float charPositionX, float charPositionY, float hearDistance) {
 
 		// volume range 0 - 1
 		float distance = 0;
@@ -53,7 +52,7 @@ public class Music {
 			music.setVolume(0f);
 	}
 	
-	public void play(float musicPositionX, float musicPositionY, float charPositionX, float charPositionY) {
+	public void play(float musicPositionX, float musicPositionY, float charPositionX, float charPositionY, float hearDistance) {
 
 		// volume range 0 - 1
 		float distance = 0;
