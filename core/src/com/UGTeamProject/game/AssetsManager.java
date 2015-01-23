@@ -41,6 +41,8 @@ public class AssetsManager {
 
 	public static com.badlogic.gdx.graphics.Texture touchBackground;
 	public static com.badlogic.gdx.graphics.Texture touchKnob;
+	public static com.badlogic.gdx.graphics.Texture pickupButton;
+	public static com.badlogic.gdx.graphics.Texture pistolButton;
 	public static com.badlogic.gdx.graphics.Texture background;
 	public static com.badlogic.gdx.graphics.Texture items;
 
@@ -75,6 +77,8 @@ public class AssetsManager {
 		npcTexture.setOrigin(32f, 14f);
 		touchBackground = new Texture("sprites/touchBackground.png").getTexture();
 		touchKnob = new Texture("sprites/touchKnob.png").getTexture();
+		pickupButton = new Texture("sprites/pickupArrow.png").getTexture();
+		pistolButton = new Texture("sprites/pistolButton.png").getTexture();
 		background = new com.badlogic.gdx.graphics.Texture("sprites/background.png");
 		items = new com.badlogic.gdx.graphics.Texture("sprites/items.png");
 

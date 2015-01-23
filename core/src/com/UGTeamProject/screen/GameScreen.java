@@ -15,7 +15,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -31,6 +34,8 @@ public class GameScreen extends ScreenAdapter {
 	ScreenInput updateActor;
 	Touchpad leftAnalog;
 	Touchpad rightAnalog;
+	Button pickupButton;
+	Button weaponButton; 
 	Map map;
 
 	public GameScreen(GameManager game) {
@@ -43,10 +48,17 @@ public class GameScreen extends ScreenAdapter {
 		newport = new FitViewport(400, 300, camera);
 		stage = new Stage(newport, game.batcher);
 		if (Gdx.app.getType() == ApplicationType.Android) {
+			
+			pickupButton = ScreenInput.initButton(player.getX(), player.getY(),AssetsManager.pickupButton);
+			weaponButton = ScreenInput.initButton(player.getX() + 60, player.getY(),AssetsManager.pistolButton);
 			leftAnalog = ScreenInput.initTouchpad(player.getX(), player.getY());
 			rightAnalog = ScreenInput.initTouchpad(player.getX() + 300, player.getY());
+			rightAnalog.setResetOnTouchUp(false);
+			
 			stage.addActor(leftAnalog);
 			stage.addActor(rightAnalog);
+			stage.addActor(pickupButton);
+			stage.addActor(weaponButton);
 		}
 		map = new Map();
 		GameObjectManager.load();
@@ -88,7 +100,7 @@ public class GameScreen extends ScreenAdapter {
 		player.draw(game.batcher);
 
 		if (Gdx.app.getType() == ApplicationType.Android)
-			updateActor.listen(leftAnalog, rightAnalog);
+			updateActor.listen(leftAnalog, rightAnalog, pickupButton,weaponButton);
 		else if (Gdx.app.getType() == ApplicationType.Desktop)
 			updateActor.listen();
 
