@@ -18,7 +18,7 @@ public class Map {
 				Vector2 position = new Vector2(i * Chunk.WIDTH, j * Chunk.HEIGHT);
 				Chunk[][] neighbours = new Chunk[3][3];
 				List<Drawable> objects = new ArrayList<Drawable>();
-				objects.add(new Texture("sprites/grass.png", new Vector2(50, 50), position));
+				//objects.add(new Texture("sprites/grass.png", new Vector2(50, 50), position));
 				map[i][j] = new Chunk(position, objects, neighbours);
 			}
 

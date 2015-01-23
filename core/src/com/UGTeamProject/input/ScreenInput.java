@@ -2,7 +2,12 @@ package com.UGTeamProject.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
@@ -36,22 +41,60 @@ public class ScreenInput {
 		touchpadStyle.background = touchBackground;
 		touchpadStyle.knob = touchKnob;
 		touchpad = new Touchpad(1, touchpadStyle);
-		touchpad.setBounds(x - 150, y - 50, 83, 83);
+		touchpad.setBounds(x - 150, y - 50, 70, 70);
 
 		return touchpad;
 	}
+	
+	public static Button initButton(float x, float y,Texture background) {
+		Button button;
+		ButtonStyle buttonStyle;
+		Skin buttonSkin;
 
-	public void listen(Touchpad leftAnalog, Touchpad rightAnalog) {
+		buttonSkin = new Skin();
+		buttonSkin.add("buttonBackground", background);
+		buttonStyle = new ButtonStyle();
+		buttonStyle.up = buttonSkin.getDrawable("buttonBackground");
+		button = new Button(buttonStyle);
+		button.setBounds(x - 150, y - 50, 40, 32);
+
+		return button;
+	}
+
+	public void listen(Touchpad leftAnalog, Touchpad rightAnalog, Button pickupButton, Button weaponButton) {
+		
+		pickupButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            	player.pickUp();
+            	return true;
+            }
+        });
+		
+		weaponButton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            	player.changeWeapon();
+            	return true;
+            }
+        });
+		
 		player.setX(player.getX() + leftAnalog.getKnobPercentX() * 5);
-		leftAnalog.setX((player.getX() - 150) + leftAnalog.getKnobPercentX() * 5);
 		player.setY(player.getY() + leftAnalog.getKnobPercentY() * 5);
-		leftAnalog.setY((player.getY() - 90) + leftAnalog.getKnobPercentY() * 5);
+		
+		leftAnalog.setX((player.getX() - 150));
+		leftAnalog.setY((player.getY() - 90));
+		
+		rightAnalog.setX(player.getX() + 150);
+		rightAnalog.setY(player.getY() - 90);
+		
+		pickupButton.setX(player.getX() + 190);
+		pickupButton.setY(player.getY());
+		
+		weaponButton.setX(player.getX() + 140);
+		weaponButton.setY(player.getY());
 
 		vec.set(rightAnalog.getKnobPercentX(), rightAnalog.getKnobPercentY());
 		player.setRotation(vec.angle() + 270);
-
-		rightAnalog.setX((player.getX() + 150) + rightAnalog.getKnobPercentX() * 5);
-		rightAnalog.setY((player.getY() - 90) + rightAnalog.getKnobPercentY() * 5);
+		
 	}
 
 	public void listen() {
