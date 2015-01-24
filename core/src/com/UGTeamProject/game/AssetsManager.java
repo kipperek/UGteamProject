@@ -38,6 +38,7 @@ public class AssetsManager {
 	public static Texture npcTexture;
 	public static Texture pistolTexture;
 	public static Texture rifleTexture;
+	public static Texture bulletTexture;
 
 	public static com.badlogic.gdx.graphics.Texture touchBackground;
 	public static com.badlogic.gdx.graphics.Texture touchKnob;
@@ -67,7 +68,9 @@ public class AssetsManager {
 		playerRifleTexture.setOrigin(32f, 14f);
 		playerRifle2Texture = new Texture("sprites/playerRifle2.png");
 		playerRifle2Texture.setOrigin(32f, 14f);
-			
+		
+		
+		bulletTexture = new Texture("sprites/bullet.png");
 		pistolTexture = new Texture("sprites/pistol.png");
 		rifleTexture = new Texture("sprites/rifle.png");
 
