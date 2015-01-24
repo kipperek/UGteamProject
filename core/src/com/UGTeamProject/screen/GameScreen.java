@@ -102,6 +102,7 @@ public class GameScreen extends ScreenAdapter {
 			npc.draw(game.batcher);
 		}
 		player.draw(game.batcher);
+		player.drawBullets(game.batcher);
 
 		if (Gdx.app.getType() == ApplicationType.Android)
 			updateActor.listen(leftAnalog, rightAnalog, pickupButton,weaponButton);

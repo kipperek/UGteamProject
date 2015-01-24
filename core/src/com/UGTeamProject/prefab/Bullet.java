@@ -14,13 +14,13 @@ public class Bullet {
 	
 	public Bullet(Vector2 startPosition, float angle){
 		this.position = startPosition;
-		this.startPosition = startPosition;
+		this.startPosition = new Vector2(startPosition.x,startPosition.y);
 		this.angle = angle;
 		this.bulletTexture = AssetsManager.bulletTexture;
 	}
 	
 	private void act(){
-		float speed = 90 * Gdx.graphics.getDeltaTime();
+		float speed = 500 * Gdx.graphics.getDeltaTime();
 		position.x += (speed * Math.cos(Math.toRadians(this.angle + 90)));
 		position.y += (speed * Math.sin(Math.toRadians(this.angle + 90)));
 	}
@@ -31,8 +31,8 @@ public class Bullet {
 		float yDelta = Math.abs(this.startPosition.y - this.position.y);
 		
 		float deltaPosition = (float)Math.sqrt(Math.pow(xDelta,2)+Math.pow(yDelta,2));
-		
-		if(deltaPosition > 200)
+		System.out.println(deltaPosition);
+		if(deltaPosition > 1000)
 			return true;		
 		
 		return false;

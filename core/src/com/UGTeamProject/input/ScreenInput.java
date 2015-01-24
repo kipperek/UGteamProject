@@ -1,6 +1,7 @@
 package com.UGTeamProject.input;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -111,6 +112,12 @@ public class ScreenInput {
 			player.pickUp();
 		if (Gdx.input.isKeyJustPressed(Keys.Q))
 			player.changeWeapon();
+		
+		 if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+			 player.shoot();
+		 }else{
+			 player.notShooting();
+		 }
 
 		float mouseX = Gdx.input.getX();
 		float mouseY = Gdx.input.getY();

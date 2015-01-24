@@ -1,12 +1,18 @@
 package com.UGTeamProject.actor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.UGTeamProject.game.ItemManager;
 import com.UGTeamProject.item.Item;
 import com.UGTeamProject.item.Pistol;
 import com.UGTeamProject.item.Rifle;
 import com.UGTeamProject.item.Weapon;
+import com.UGTeamProject.prefab.Bullet;
 import com.UGTeamProject.prefab.adapters.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 
 public class Character extends Actor {
 
@@ -16,6 +22,8 @@ public class Character extends Actor {
 	protected int pistolAmmo;
 	protected int rifleAmmo;
 	protected boolean wut;
+	protected boolean shooterStop = false;
+	protected List<Bullet> bullets = new ArrayList<Bullet>();
 
 	public Character(Texture texture) {
 		super(texture);
@@ -75,5 +83,30 @@ public class Character extends Actor {
 		} while (weapons[currentWeaponIndex] == null);
 		currentWeapon = weapons[currentWeaponIndex];
 		texture = currentWeapon.playerTexture;
+	}
+	
+	public void shoot(){
+		if(shooterStop == false){
+			bullets.add(new Bullet(new Vector2(actor.x,actor.y),rotation));	
+			shooterStop = true;
+		}
+	}
+	
+	public void notShooting(){
+		shooterStop = false;
+	}
+	
+	public void drawBullets(Batch batcher){
+		List<Bullet> toDelete = new ArrayList<Bullet>();
+		for(Bullet bullet : bullets){
+			bullet.draw(batcher);
+			if(bullet.isOutOfBounds())
+				toDelete.add(bullet);
+		}
+		
+		for(Bullet bullet : toDelete){
+			bullets.remove(bullet);
+		}
+		
 	}
 }
