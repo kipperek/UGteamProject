@@ -104,23 +104,25 @@ public class AssetsManager {
 				Node node = nodeLst.item(i);
 
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element item = (Element) node;
-					String name = item.getAttribute("name");
-					Element type = (Element) item.getElementsByTagName("type").item(0);
+				Element item = (Element) node;
+				String name = item.getAttribute("name");
+				Element type = (Element) item.getElementsByTagName("type").item(0);
+				Element file = (Element)item.getElementsByTagName("file").item(0);
+				Element position = (Element)item.getElementsByTagName("position").item(0);
 
-					switch (type.getNodeValue()) {
-					case "Texture":
-									
-					Element position = (Element)item.getElementsByTagName("position").item(0);
+				switch (type.getNodeValue()) {
+				case "Texture":
+					Object textures;
+					
 					Element origin = (Element)item.getElementsByTagName("origin").item(0);
 					
 					if(origin != null)
-						textures.puit(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue()));
+						textures.puit(name, new Texture("sprites/" + file.getNodeValue()));
 					else if(position != null && origin == null)
-						textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue(), origin));
+						textures.put(name, new Texture("sprites/" + file.getNodeValue(), origin));
 					else
-						textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue(), origin, position));		
-						break;
+						textures.put(name, new Texture("sprites/" + file.getNodeValue(), origin, position));
+					break;
 					case "Sound":
 						break;
 					case "Music":
