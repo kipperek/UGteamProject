@@ -6,7 +6,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Actor {
 
-	protected Rectangle actor;
+	//protected Rectangle actor;
+	protected Physics actor;
 	protected Texture texture;
 	protected float rotation = 1;
 	protected int life = 100;
