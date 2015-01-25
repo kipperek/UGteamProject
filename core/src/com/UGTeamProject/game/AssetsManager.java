@@ -110,7 +110,16 @@ public class AssetsManager {
 
 					switch (type.getNodeValue()) {
 					case "Texture":
-						textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue()));
+									
+					Element position = (Element)item.getElementsByTagName("position").item(0);
+					Element origin = (Element)item.getElementsByTagName("origin").item(0);
+					
+					if(origin != null)
+						textures.puit(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue()));
+					else if(position != null && origin == null)
+						textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue(), origin));
+					else
+						textures.put(name, new Texture("sprites/" + item.getElementsByTagName("file").item(0).getNodeValue(), origin, position));		
 						break;
 					case "Sound":
 						break;
