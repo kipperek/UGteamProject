@@ -128,7 +128,10 @@ public class AssetsManager {
 						soud.put(name, new Sound("sprites/" + file.getNodeValue(), position));
 						break;
 					case "Music":
+					if(position == null)
 						music.put(name, new Music("music/" + item.getElementsByTagName("file").item(0).getNodeValue()));
+					else
+						music.put(name, new Music("music/" + item.getElementsByTagName("file").item(0).getNodeValue(), position));
 						break;
 					case "Physics":
 						break;
